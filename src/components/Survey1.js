@@ -31,9 +31,9 @@ class Survey1 extends React.Component {
         <h3>How do you take your coffee?</h3>
         </div>
         <ButtonToolbar style={style.toolbar}>
-            <Button style={style.button} variant="success">Black</Button>
-            <Button style={style.button} variant="success">Cream</Button>
-            <Button style={style.button} variant="light">Continue</Button>
+          <Button style={style.button} variant="success">Black</Button>
+          <Button style={style.button} variant="success">Cream</Button>
+          <Button style={style.button} variant="light">Continue</Button>
         </ButtonToolbar>
     </React.Fragment>
     )
