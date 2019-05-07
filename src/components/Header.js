@@ -1,8 +1,7 @@
 import React from "react";
 import Coffee from "../assets/images/jumbotron-image.jpg";
 import Image from "react-bootstrap/Image";
-import { Nav } from "react-bootstrap";
-
+import { NavLink } from "react-router-dom";
 
 const style = {
   jumbotron: {
@@ -21,7 +20,8 @@ const style = {
     flexDirection: "column",
     justifyContent: "center",
     alignItem: "center",
-    height: "500px"
+    height: "500px",
+    color: "#4C3A32"
   },
   link: {
     textAlign: "center",
@@ -40,10 +40,12 @@ export default class Jumbotron extends React.Component {
         <div style={style.item}>
           <h1>Find your</h1>
           <h1>Coffee Match</h1>
-          <Nav.Link to ='./survey1.js' style={style.link}>Take Survey</Nav.Link>
+          <NavLink to="/survey/1" style={style.link}>
+            Take Survey
+          </NavLink>
         </div>
         <div style={style.item}>
-          <Image width="500" src={Coffee} fluid alt="" />
+          <Image width="500" src={Coffee} alt="" />
         </div>
       </div>
     );

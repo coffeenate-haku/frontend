@@ -1,6 +1,7 @@
 import React from "react";
-import { Navbar, Nav } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import Coffee from "../assets/logos/logo-main.svg";
+import { NavLink } from "react-router-dom";
 
 const style = {
   navStyle: {
@@ -33,8 +34,12 @@ class Navigation extends React.Component {
       <Navbar style={style.navStyle} collapseOnSelect sty>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse style={style.justify} id="responsive-navbar-nav">
-          <Nav.Link style={style.link}>Home</Nav.Link>
-          <Nav.Link style={style.link}>Search</Nav.Link>
+          <NavLink to="/" style={style.link}>
+            Home
+          </NavLink>
+          <NavLink to="/search" style={style.link}>
+            Search
+          </NavLink>
           <Navbar.Brand>
             <img
               style={style.logo}
@@ -44,8 +49,12 @@ class Navigation extends React.Component {
               className="d-inline-block align-top"
             />
           </Navbar.Brand>
-          <Nav.Link style={style.link}>Login</Nav.Link>
-          <Nav.Link style={style.specialLink}>Sign Up</Nav.Link>
+          <NavLink to="/login" style={style.link}>
+            Login
+          </NavLink>
+          <NavLink to="/signup" style={style.specialLink}>
+            Sign Up
+          </NavLink>
         </Navbar.Collapse>
       </Navbar>
     );

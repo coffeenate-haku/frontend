@@ -1,17 +1,17 @@
-import React from "react"
-import { ButtonToolbar, Button } from "react-bootstrap"
+import React from "react";
+import { ButtonToolbar, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const style = {
   headerStyle: {
     justifyContent: "center",
     alignItem: "center"
   }
-
-}
+};
 
 class Survey3 extends React.Component {
   render() {
-  return (
+    return (
       <div>
         <h1 style={style.headerStyle}>3 of 3</h1>
         <h3>Which flavors do you most enjoy in your coffee?</h3>
@@ -22,10 +22,12 @@ class Survey3 extends React.Component {
           <Button variant="success">Caramel</Button>
           <Button variant="success">Chocolate</Button>
           <Button variant="success">No Topping</Button>
-          <Button variant="light">Continue</Button>
+          <Link style={style.button} to="/survey/result">
+            <Button variant="light">Continue</Button>
+          </Link>
         </ButtonToolbar>
       </div>
-    )
+    );
   }
 }
 
