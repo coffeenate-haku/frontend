@@ -9,7 +9,7 @@ import Search from "./pages/Search";
 import Survey1 from "./pages/Survey1";
 import Survey2 from "./pages/Survey2";
 import Survey3 from "./pages/Survey3";
-import SurveyResult from "./pages/SurveyResult";
+import SurveyResultPage from "./pages/SurveyResultPage";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path="/survey/1" component={Survey1} />
         <Route path="/survey/2" component={Survey2} />
         <Route path="/survey/3" component={Survey3} />
-        <Route path="/survey/result" component={SurveyResult} />
+        <Route path="/survey/result" component={SurveyResultPage} />
       </Switch>
     </Router>
   );
