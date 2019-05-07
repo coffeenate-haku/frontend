@@ -4,12 +4,22 @@ import { Card, Button } from "react-bootstrap"
 const style = {
   container: {
     textAlign: "center",
-    topMargin: "20px"
+    topMargin: "20px",
+    display: "flex",
+    flexDirection: "row",   
+    justifyContent: "center",
+
   },
 
   card: {
-    width: "20rem",
     textAlign: "center",
+    justifyContent: "center",
+    width: "300px" 
+  }, 
+
+  button: {
+    padding: "20px",
+    textAlign: "center", 
     justifyContent: "center"
   }
 
@@ -26,8 +36,10 @@ class SurveyResult extends React.Component {
             <Card.Subtitle className="cardSubtitle">description</Card.Subtitle>
           </Card.Body>
         </Card>
-        <Button>See restaurant that matches you</Button>
       </div>
+      <div style={style.button}>
+        <Button>See restaurant that matches you</Button>
+      </div>  
     </React.Fragment>
     )
   }
