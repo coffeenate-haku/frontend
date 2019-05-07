@@ -13,15 +13,17 @@ const style = {
 class Survey2 extends React.Component {
   render() {
   return (
-      <div>
-        <h1 style={style.headerStyle}>2 of 3</h1>
+    <React.Fragment>
+      <div style={style.container}>
+        <h1>2 of 3</h1>
         <h3>Which type of sweetness do you prefer?</h3>
-        <ButtonToolbar>
-          <Button variant="outline-success">Sugar</Button>
-          <Button variant="outline-success">Less Sugar</Button>
-          <Button variant="outline-light">Continue</Button>
-        </ButtonToolbar>
       </div>
+      <ButtonToolbar>
+        <Button variant="success">Sugar</Button>
+        <Button variant="success">Less Sugar</Button>
+        <Button variant="light">Continue</Button>
+      </ButtonToolbar>
+    </React.Fragment>
     )
   }
 }
