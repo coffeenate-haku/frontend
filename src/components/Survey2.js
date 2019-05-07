@@ -3,7 +3,9 @@ import { ButtonToolbar, Button } from "react-bootstrap"
 
 const style = {
   headerStyle: {
-    justifyContent: "center"
+    justifyContent: "center",
+    alignItem: "center"
+    
   }
 
 }
@@ -23,3 +25,5 @@ class Survey2 extends React.Component {
     )
   }
 }
+
+export default Survey2;
