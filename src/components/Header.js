@@ -3,6 +3,7 @@ import Coffee from "../assets/images/jumbotron-image.jpg";
 import Image from "react-bootstrap/Image";
 import { Nav } from "react-bootstrap";
 
+
 const style = {
   jumbotron: {
     width: "100%",
@@ -39,7 +40,7 @@ export default class Jumbotron extends React.Component {
         <div style={style.item}>
           <h1>Find your</h1>
           <h1>Coffee Match</h1>
-          <Nav.Link style={style.link}>Take Survey</Nav.Link>
+          <Nav.Link to ='./survey1.js' style={style.link}>Take Survey</Nav.Link>
         </div>
         <div style={style.item}>
           <Image width="500" src={Coffee} fluid alt="" />
