@@ -16,13 +16,13 @@ class Survey3 extends React.Component {
         <h1 style={style.headerStyle}>3 of 3</h1>
         <h3>Which flavors do you most enjoy in your coffee?</h3>
         <ButtonToolbar>
-          <Button variant="outline-success">Brown Sugar</Button>
-          <Button variant="outline-success">Hazelnut</Button>
-          <Button variant="outline-success">Floral</Button>
-          <Button variant="outline-success">Caramel</Button>
-          <Button variant="outline-success">Chocolate</Button>
-          <Button variant="outline-success">No Topping</Button>
-          <Button variant="outline-light">Continue</Button>
+          <Button variant="success">Brown Sugar</Button>
+          <Button variant="success">Hazelnut</Button>
+          <Button variant="success">Floral</Button>
+          <Button variant="success">Caramel</Button>
+          <Button variant="success">Chocolate</Button>
+          <Button variant="success">No Topping</Button>
+          <Button variant="light">Continue</Button>
         </ButtonToolbar>
       </div>
     )
