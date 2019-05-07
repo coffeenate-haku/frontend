@@ -12,7 +12,8 @@ const style = {
   },
 
   heading: {
-    textAlign: "center"
+    textAlign: "center",
+    color: "#4C3A32"
   },
 
   content: {
@@ -32,11 +33,14 @@ const style = {
     display: "flex",
     flexDirection: "column",
     justifyContent: "space-between",
-    height: "150px"
+    height: "200px",
+    color: "#4C3A32"
   },
 
   paragraph: {
-    fontSize: "30px"
+    fontSize: "20px",
+    height: "100px",
+    color: "#4C3A32"
   }
 };
 
@@ -44,7 +48,7 @@ export default class Content extends React.Component {
   render() {
     return (
       <div style={style.container}>
-        <h2 style={style.heading}>Why Coffeenate</h2>
+        <h2 style={style.heading}>Why Coffeenate?</h2>
         <div style={style.content}>
           <div style={style.item}>
             <img src={How1} alt="" />
@@ -74,32 +78,31 @@ export default class Content extends React.Component {
             </div>
           </div>
         </div>
+        <h2 style={style.heading}>How it Works?</h2>
         <div style={style.content}>
           <div style={style.item}>
             <img src={What1} alt="" />
             <div style={style.desc}>
-              <h3>Good Coffee Only</h3>
+              <h3>Fill out the Survey</h3>
               <p style={style.paragraph}>
-                Our recommendation system tells you the best coffee around
+                Take our survey to know what coffee is your type
               </p>
             </div>
           </div>
           <div style={style.item}>
             <img src={What2} alt="" />
             <div style={style.desc}>
-              <h3>No More Wasted Money</h3>
+              <h3>Find The Nearest Coffee</h3>
               <p style={style.paragraph}>
-                You no longer waste your money on a cup of coffee you dont like
+                Our search engine will find similar type of your coffee
               </p>
             </div>
           </div>
           <div style={style.item}>
             <img src={What3} alt="" />
             <div style={style.desc}>
-              <h3>Find Your Ambience</h3>
-              <p style={style.paragraph}>
-                Easier to find a place to enjoy your type coffee
-              </p>
+              <h3>Save Your Result</h3>
+              <p style={style.paragraph}>Get matched with your coffee type</p>
             </div>
           </div>
         </div>
