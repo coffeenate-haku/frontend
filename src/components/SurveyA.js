@@ -17,7 +17,7 @@ const style = {
   },
 
   button: {
-    width: "100px",
+    width: "150px",
     margin: "15px"
   }
 };
@@ -37,8 +37,8 @@ class Survey1 extends React.Component {
           <Button style={style.button} variant="success">
             Cream
           </Button>
-          <Link style={style.button} to="/survey/2">
-            <Button variant="light">Continue</Button>
+          <Link to="/survey/2">
+            <Button style={style.button} variant="light">Continue</Button>
           </Link>
         </ButtonToolbar>
       </React.Fragment>

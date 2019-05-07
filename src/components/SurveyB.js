@@ -3,9 +3,22 @@ import { ButtonToolbar, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 const style = {
-  headerStyle: {
+  container: {
+    textAlign: "center",
+    topMargin: "20px"
+  },
+
+  toolbar: {
+    display: "flex",
     justifyContent: "center",
-    alignItem: "center"
+    alignItems: "center",
+    flexDirection: "column",
+    margin: "20px 0px"
+  },
+
+  button: {
+    width: "150px",
+    margin: "15px"
   }
 };
 
@@ -17,11 +30,11 @@ class Survey2 extends React.Component {
           <h1>2 of 3</h1>
           <h3>Which type of sweetness do you prefer?</h3>
         </div>
-        <ButtonToolbar>
-          <Button variant="success">Sugar</Button>
-          <Button variant="success">Less Sugar</Button>
-          <Link style={style.button} to="/survey/3">
-            <Button variant="light">Continue</Button>
+        <ButtonToolbar style={style.toolbar}>
+          <Button style={style.button} variant="success">Sugar</Button>
+          <Button style={style.button} variant="success">Less Sugar</Button>
+          <Link to="/survey/3">
+            <Button style={style.button} variant="light">Continue</Button>
           </Link>
         </ButtonToolbar>
       </React.Fragment>
