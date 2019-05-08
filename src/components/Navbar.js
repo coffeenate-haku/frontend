@@ -2,6 +2,8 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import Coffee from "../assets/logos/logo-main.svg";
 import { NavLink } from "react-router-dom";
+import { Modal } from "react-bootstrap"
+import { FormikForm } from "../components/Login"
 
 const style = {
   navStyle: {
@@ -29,6 +31,22 @@ const style = {
 };
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      show: false, 
+    }
+
+  }
+
+  handleClose = () => {
+    this.setState({ show: false })
+  }
+
+  handleShow = () => {
+    this.setState({ show:true })
+  }
   render() {
     return (
       <Navbar style={style.navStyle} collapseOnSelect sty>
@@ -49,13 +67,30 @@ class Navigation extends React.Component {
               className="d-inline-block align-top"
             />
           </Navbar.Brand>
-          <NavLink to="/login" style={style.link}>
+          <NavLink onClick={this.handleShow} style={style.link}>
+
             Login
           </NavLink>
-          <NavLink to="/signup" style={style.specialLink}>
-            Sign Up
+
+
+
+          <NavLink to="/register" style={style.specialLink}>
+            Register
           </NavLink>
         </Navbar.Collapse>
+        <Modal show={this.state.show} onHide={this.handleClose}>
+          <Modal.Header closeButton>
+            <Modal.Title>Modal heading</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <FormikForm />
+          </Modal.Body>
+          <Modal.Footer>
+            <NavLink onClick={this.handleClose}>
+            close
+            </NavLink>
+          </Modal.Footer>
+        </Modal>
       </Navbar>
     );
   }

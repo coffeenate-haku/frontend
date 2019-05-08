@@ -8,6 +8,7 @@ const style = {
     display: "flex",
     flexDirection: "row",   
     justifyContent: "center",
+    paddingTop: "150px",
 
   },
 

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const style = {
   container: {
     textAlign: "center",
-    topMargin: "20px"
+    paddingTop: "150px",
   },
 
   toolbar: {

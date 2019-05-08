@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 
 const style = {
   container: {
+    paddingTop: "150px",
     textAlign: "center",
-    topMargin: "20px"
   },
 
   toolbar: {
