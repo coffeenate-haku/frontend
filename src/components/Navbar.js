@@ -26,7 +26,8 @@ const style = {
   specialLink: {
     backgroundColor: "#4C3A32",
     color: "#f5f1e8",
-    fontSize: "24px"
+    fontSize: "24px",
+    padding: "10px"
   }
 };
 

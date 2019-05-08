@@ -29,7 +29,8 @@ const style = {
     backgroundColor: "#4C3A32",
     color: "#f5f1e8",
     fontSize: "24px",
-    marginTop: "50px"
+    marginTop: "50px",
+    padding: "10px"
   }
 };
 
