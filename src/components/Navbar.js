@@ -2,8 +2,10 @@ import React from "react";
 import { Navbar } from "react-bootstrap";
 import Coffee from "../assets/logos/logo-main.svg";
 import { NavLink } from "react-router-dom";
-import { Modal } from "react-bootstrap"
+import { Modal, Container, Row, Col } from "react-bootstrap"
 import { FormikForm } from "../components/Login"
+import modal from "../assets/images/modal.jpg"
+
 
 const style = {
   navStyle: {
@@ -36,17 +38,17 @@ class Navigation extends React.Component {
     super(props);
 
     this.state = {
-      show: false, 
+      lgshow: false, 
     }
 
   }
 
   handleClose = () => {
-    this.setState({ show: false })
+    this.setState({ lgshow: false })
   }
 
   handleShow = () => {
-    this.setState({ show:true })
+    this.setState({ lgshow:true })
   }
   render() {
     return (
@@ -79,12 +81,25 @@ class Navigation extends React.Component {
             Register
           </NavLink>
         </Navbar.Collapse>
-        <Modal show={this.state.show} onHide={this.handleClose}>
+        <Modal 
+        size='lg'
+        show={this.state.lgshow} 
+        onHide={this.handleClose}
+        >
           <Modal.Header closeButton>
             <Modal.Title>Modal heading</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <FormikForm />
+            <Container> 
+              <Row>
+              <Col xs={12} md={7}>
+                 <img src={modal} alt="modal" width="400"  />
+                </Col>
+                <Col xs={12} md={4}>
+                  <FormikForm />
+                </Col>
+              </Row>
+            </Container>
           </Modal.Body>
           <Modal.Footer>
             <NavLink onClick={this.handleClose}>
