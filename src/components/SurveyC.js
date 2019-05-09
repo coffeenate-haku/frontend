@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const style = {
   container: {
     textAlign: "center",
-    paddingTop: "150px",
+    paddingTop: "150px"
   },
 
   toolbar: {
@@ -38,19 +38,33 @@ class Survey3 extends React.Component {
         </div>
         <ButtonToolbar style={style.toolbar}>
           <div>
-            <Button style={style.button} variant="success">Brown Sugar</Button>
-            <Button style={style.button} variant="success">Hazelnut</Button>
+            <Button style={style.button} variant="success">
+              Brown Sugar
+            </Button>
+            <Button style={style.button} variant="success">
+              Hazelnut
+            </Button>
           </div>
           <div>
-            <Button style={style.button} variant="success">Floral</Button>
-            <Button style={style.button} variant="success">Caramel</Button>
+            <Button style={style.button} variant="success">
+              Floral
+            </Button>
+            <Button style={style.button} variant="success">
+              Caramel
+            </Button>
           </div>
           <div>
-            <Button style={style.button} variant="success">Chocolate</Button>
-            <Button style={style.button} variant="success">No Topping</Button>
+            <Button style={style.button} variant="success">
+              Chocolate
+            </Button>
+            <Button style={style.button} variant="success">
+              No Topping
+            </Button>
           </div>
-          <Link style={style.button} to="/survey/result">
-          <Button style={style.continue} variant="light">Continue</Button>
+          <Link style={style.button} to="/result">
+            <Button style={style.continue} variant="light">
+              Continue
+            </Button>
           </Link>
         </ButtonToolbar>
       </React.Fragment>
