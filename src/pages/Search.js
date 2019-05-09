@@ -1,4 +1,6 @@
 import React from "react";
+import { Link } from "react-router-dom";
+
 import SearchNav from "../components/SearchNav";
 import DefaultImg from "../assets/images/default-image.jpeg";
 import Rating from "../assets/thumbnail/five-star.png";
@@ -74,7 +76,9 @@ const Search = props => {
           {best.map((best, index) => {
             return (
               <Card key={index}>
-                <Img src={best.image} alt="" />
+                <Link to="/details">
+                  <Img src={best.image} alt="" />
+                </Link>
                 <H5>{best.title}</H5>
                 <Star src={best.rating} alt="" />
               </Card>
@@ -88,7 +92,9 @@ const Search = props => {
           {best.map((best, index) => {
             return (
               <Card key={index}>
-                <Img src={best.image} alt="" />
+                <Link to="/details">
+                  <Img src={best.image} alt="" />
+                </Link>
                 <H5>{best.title}</H5>
                 <Star src={best.rating} alt="" />
               </Card>
@@ -102,7 +108,9 @@ const Search = props => {
           {best.map((best, index) => {
             return (
               <Card key={index}>
-                <Img src={best.image} alt="" />
+                <Link to="/details">
+                  <Img src={best.image} alt="" />
+                </Link>
                 <H5>{best.title}</H5>
                 <Star src={best.rating} alt="" />
               </Card>

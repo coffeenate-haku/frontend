@@ -7,6 +7,7 @@ import Survey1 from "./pages/Survey1";
 import Survey2 from "./pages/Survey2";
 import Survey3 from "./pages/Survey3";
 import Result from "./pages/Result";
+import Details from "./pages/Details";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/survey/2" component={Survey2} />
         <Route path="/survey/3" component={Survey3} />
         <Route path="/result" component={Result} />
+        <Route path="/details" component={Details} />
       </Switch>
     </Router>
   );

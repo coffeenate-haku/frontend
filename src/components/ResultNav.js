@@ -5,13 +5,15 @@ import { Link } from "react-router-dom";
 
 const style = {
   navBg: {
-    backgroundColor: "#f5f1e8"
+    backgroundColor: "#f5f1e8",
+    justifyContent: "space-between",
+    padding: "0px 50px"
   },
 
   nav: {
-    display: "flex",
-    justifyContent: "flex-end",
-    marginRight: "50px"
+    marginRight: "30px",
+    color: "#4C3A32",
+    fontSize: "24px"
   }
 };
 
@@ -24,9 +26,9 @@ export default class ResultNav extends React.Component {
             <Image width="250" src={Coffee} alt="" />
           </Link>
         </Navbar.Brand>
-        <NavLink style={style.nav} to="/profile">
+        <Link style={style.nav} to="/profile">
           Profile
-        </NavLink>
+        </Link>
       </Navbar>
     );
   }
