@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
+import "../index.css";
 
 import Coffee from "../assets/logos/logo-main.svg";
 import {
@@ -48,12 +49,7 @@ const style = {
   },
 
   tabs: {
-    flexDirection: "row",
-    width: "400px"
-  },
-
-  tab: {
-    width: "100px"
+    flexDirection: "row"
   },
 
   img: {

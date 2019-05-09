@@ -12,3 +12,9 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+/* this anchor inside nav-tabs in ./components/Navbar.js   */
+nav.navbar-nav.nav-tabs a {
+  color: #4c3a32;
+  padding: 5px 40px;
+}
