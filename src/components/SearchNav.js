@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Form, Button, FormControl, Image } from "react-bootstrap";
+import { Navbar, Form, Button, FormControl, Image } from "react-bootstrap";
 import Coffee from "../assets/logos/logo-main.svg";
 import { Link } from "react-router-dom";
 
