@@ -1,6 +1,6 @@
-import React from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import React from "react"
+import { ButtonToolbar, Button } from "react-bootstrap"
+import { Link } from "react-router-dom"
 
 const style = {
   container: {
@@ -21,7 +21,7 @@ const style = {
     width: "150px",
     margin: "15px"
   }
-};
+}
 
 class Survey1 extends React.Component {
   render() {
@@ -39,12 +39,14 @@ class Survey1 extends React.Component {
             Cream
           </Button>
           <Link to="/survey/2">
-            <Button style={style.button} variant="light">Continue</Button>
+            <Button style={style.button} variant="light">
+              Continue
+            </Button>
           </Link>
         </ButtonToolbar>
       </React.Fragment>
-    );
+    )
   }
 }
 
-export default Survey1;
+export default Survey1

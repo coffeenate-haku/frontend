@@ -39,20 +39,18 @@ export const FormikForm = () => {
         initialValues={{ email: "", password: "" }}
         validate={validateEmail}
         onSubmit={(values, { setSubmitting }) => {
-          setTimeout(() => {
-            const API_URL = `http://localhost:5210/users/login`
-            const userLogin = {
-              email: values.email,
-              password: values.password
-            }
+          const API_URL = `http://localhost:5210/users/login`
+          const userLogin = {
+            email: values.email,
+            password: values.password
+          }
 
-            axios
-              .post(API_URL, userLogin)
-              .then(response => console.log(response))
-              .catch(error => console.log(error))
+          axios
+            .post(API_URL, userLogin)
+            .then(response => console.log(response))
+            .catch(error => console.log(error))
 
-            setSubmitting(false)
-          }, 400)
+          setSubmitting(false)
         }}
       >
         {({ isSubmitting }) => (
