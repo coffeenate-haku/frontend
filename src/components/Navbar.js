@@ -1,8 +1,8 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import styled from "@emotion/styled";
+import React from "react"
+import { NavLink } from "react-router-dom"
+import styled from "@emotion/styled"
 
-import Coffee from "../assets/logos/logo-main.svg";
+import Coffee from "../assets/logos/logo-main.svg"
 import {
   Modal,
   Container,
@@ -12,10 +12,10 @@ import {
   Tabs,
   Navbar,
   Image
-} from "react-bootstrap";
-import { FormikForm } from "../components/Login";
-import modal from "../assets/thumbnail/modal.jpg";
-import FormRegister from "../components/Register";
+} from "react-bootstrap"
+import { FormikForm } from "../components/Login"
+import modal from "../assets/thumbnail/modal.jpg"
+import FormRegister from "../components/Register"
 
 const style = {
   navStyle: {
@@ -59,39 +59,39 @@ const style = {
   img: {
     maxWidth: "350px"
   }
-};
+}
 
 const Div = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
   padding: 0 100px 0 75px;
-`;
+`
 
 const LinkNav = styled.div`
   margin-top: 30px;
-`;
+`
 
 class Navigation extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       key: "Sign",
       lgshow: false
-    };
+    }
   }
 
   handleClose = () => {
-    this.setState({ lgshow: false });
-  };
+    this.setState({ lgshow: false })
+  }
 
   handleShow = () => {
-    this.setState({ lgshow: true });
-  };
+    this.setState({ lgshow: true })
+  }
   render() {
     return (
-      <Navbar style={style.navStyle} collapseOnSelect sty>
+      <Navbar style={style.navStyle} collapseOnSelect sty="true">
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Div>
@@ -110,7 +110,11 @@ class Navigation extends React.Component {
               <NavLink to="/search" style={style.link}>
                 Search
               </NavLink>
-              <NavLink onClick={this.handleShow} style={style.specialLink}>
+              <NavLink
+                to="/"
+                onClick={this.handleShow}
+                style={style.specialLink}
+              >
                 Sign in
               </NavLink>
             </LinkNav>
@@ -156,12 +160,14 @@ class Navigation extends React.Component {
             </Tabs>
           </Modal.Body>
           <Modal.Footer>
-            <NavLink onClick={this.handleClose}>close</NavLink>
+            <NavLink to="/" onClick={this.handleClose}>
+              close
+            </NavLink>
           </Modal.Footer>
         </Modal>
       </Navbar>
-    );
+    )
   }
 }
 
-export default Navigation;
+export default Navigation
