@@ -1,7 +1,7 @@
-import React from "react";
-import Coffee from "../assets/images/jumbotron-image.jpg";
-import Image from "react-bootstrap/Image";
-import { NavLink } from "react-router-dom";
+import React from "react"
+import Coffee from "../assets/images/jumbotron-image.jpg"
+import Image from "react-bootstrap/Image"
+import { NavLink } from "react-router-dom"
 
 const style = {
   jumbotron: {
@@ -9,9 +9,7 @@ const style = {
     height: "600px",
     backgroundColor: "#f5f1e8",
     margin: "0px",
-    width: "100%",
     padding: "0px 200px",
-    margin: "0px",
     display: "flex",
     justifyContent: "space-around"
   },
@@ -32,7 +30,7 @@ const style = {
     marginTop: "50px",
     padding: "10px"
   }
-};
+}
 
 export default class Jumbotron extends React.Component {
   render() {
@@ -49,6 +47,6 @@ export default class Jumbotron extends React.Component {
           <Image width="500" src={Coffee} alt="" />
         </div>
       </div>
-    );
+    )
   }
 }
