@@ -22,11 +22,11 @@ export default class ResultNav extends React.Component {
     return (
       <Navbar style={style.navBg} expand="lg">
         <Navbar.Brand href="#home">
-          <Link to="/">
+          <Link to="/dashboard">
             <Image width="250" src={Coffee} alt="" />
           </Link>
         </Navbar.Brand>
-        <Link style={style.nav} to="/profile">
+        <Link style={style.nav} to="/dashboard">
           Profile
         </Link>
       </Navbar>

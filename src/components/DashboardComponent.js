@@ -9,11 +9,16 @@ import Heart from "../assets/thumbnail/heart.png"
 import Account from "../assets/thumbnail/account.png"
 
 const style = {
+  div: {
+    margin: "0 auto",
+    alignItem: "center",
+    paddingLeft: "500px"
+  },
 
   container : {
     width: "400px",
     justifyContent: "center",
-    alignItem: "center"
+    alignItem: "center",
   },
 
   image: {
@@ -45,7 +50,7 @@ const style = {
 class DashboardComponent extends React.Component {
   render() {
     return (
-      <React.Fragment> 
+      <div style={style.div}> 
         <Card style={style.container}>
           <div>
             <div style={style.image}>
@@ -62,7 +67,7 @@ class DashboardComponent extends React.Component {
               <div>
                 <Image width="30" src={HomeIcon} />
                 </div>
-                <NavLink to="/home">
+                <NavLink to="/">
                   Home
                 </NavLink>
               </div>
@@ -93,7 +98,7 @@ class DashboardComponent extends React.Component {
             </div>
           </div>
         </Card>
-      </React.Fragment>
+      </div>
     )
   }
 }
