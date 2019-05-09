@@ -8,6 +8,10 @@ const style = {
 
   form: {
     textAlign: "center"
+  },
+
+  placeholder: {
+    textAlign: "center"
   }
 }
 
@@ -40,11 +44,11 @@ export const FormikForm = () => {
               
               <Form>
               <div>
-                  <Field placeholder="Username" type="email" name="email" />
+                  <Field style={style.placeholder} placeholder="Username" type="email" name="email" />
                   <ErrorMessage name="email" component="div" />
                 </div>
                 <div>
-                  <Field placeholder="Password" type="password" name="password" />
+                  <Field style={style.placeholder} placeholder="Password" type="password" name="password" />
                   <ErrorMessage name="password" component="div" />
                 </div>
                 <button type="submit" disabled={isSubmitting}>

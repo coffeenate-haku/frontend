@@ -8,24 +8,21 @@ class FormRegister extends React.Component {
   render() {
     return (
       <form>
+        <h1>Signup</h1>
         <fieldset>
-          <label htmlFor="name">Name:</label>
-          <input type="text" name="name" />
+          <input placeholder="Name" type="text" name="name" />
         </fieldset>
 
         <fieldset>
-          <label htmlFor="username">Username:</label>
-          <input type="text" name="username" />
+          <input  placeholder="Username" type="text" name="username" />
         </fieldset>
 
         <fieldset>
-          <label htmlFor="email">Email:</label>
-          <input type="email" name="email" />
+          <input placeholder="Email" type="email" name="email" />
         </fieldset>
 
         <fieldset>
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password" />
+          <input placeholder="Password" type="password" name="password" />
         </fieldset>
 
         <input type="submit" value="Register" />
