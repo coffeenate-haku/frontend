@@ -1,19 +1,24 @@
-import React from "react"
-import { Formik, Form, Field, ErrorMessage } from "formik"
+import React from "react";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import styled from "@emotion/styled";
+
+const Container = styled.div`
+  display: grid;
+`;
+
+const Button = styled.button`
+  background-color: #4c3a32;
+  color: #f5f1e8;
+  border-style: none;
+  padding: 5px 10px;
+`;
 
 const style = {
-  container: {
-    display: "flex"
-  },
-
-  form: {
-    textAlign: "center"
-  },
-
-  placeholder: {
-    textAlign: "center"
+  field: {
+    marginBottom: "10px",
+    padding: "5px 10px"
   }
-}
+};
 
 const validateEmail = values => {
   let errors = {};
@@ -27,39 +32,44 @@ const validateEmail = values => {
 
 export const FormikForm = () => {
   return (
-    <div style={style.container}>
-      <div>
-          <h1>Login</h1>
-          <Formik
-            initialValues={{ email: '', password: '' }}
-            validate={validateEmail}
-            onSubmit={(values, { setSubmitting }) => {
-              setTimeout(() => {
-                alert(JSON.stringify(values, null, 2))
-                setSubmitting(false)
-              }, 400)
-            }}
-          >
-            {({ isSubmitting }) => (
-              
-              <Form>
-              <div>
-                  <Field style={style.placeholder} placeholder="Username" type="email" name="email" />
-                  <ErrorMessage name="email" component="div" />
-                </div>
-                <div>
-                  <Field style={style.placeholder} placeholder="Password" type="password" name="password" />
-                  <ErrorMessage name="password" component="div" />
-                </div>
-                <button type="submit" disabled={isSubmitting}>
-                  Login
-                </button>
-              </Form>
-              
-            )}
-          </Formik>
-        </div>
-      </div>
-)
-}
-
+    <Container>
+      <h1>Login</h1>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validate={validateEmail}
+        onSubmit={(values, { setSubmitting }) => {
+          setTimeout(() => {
+            alert(JSON.stringify(values, null, 2));
+            setSubmitting(false);
+          }, 400);
+        }}
+      >
+        {({ isSubmitting }) => (
+          <Form>
+            <div>
+              <Field
+                style={style.field}
+                placeholder="Username"
+                type="email"
+                name="email"
+              />
+              <ErrorMessage name="email" component="div" />
+            </div>
+            <div>
+              <Field
+                style={style.field}
+                placeholder="Password"
+                type="password"
+                name="password"
+              />
+              <ErrorMessage name="password" component="div" />
+            </div>
+            <Button type="submit" disabled={isSubmitting}>
+              Login
+            </Button>
+          </Form>
+        )}
+      </Formik>
+    </Container>
+  );
+};
