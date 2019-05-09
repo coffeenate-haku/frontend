@@ -8,6 +8,7 @@ import Survey2 from "./pages/Survey2";
 import Survey3 from "./pages/Survey3";
 import Result from "./pages/Result";
 import Details from "./pages/Details";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Route path="/survey/3" component={Survey3} />
         <Route path="/result" component={Result} />
         <Route path="/details" component={Details} />
+        <Route path="/dashboard" component={Dashboard} />
       </Switch>
     </Router>
   );

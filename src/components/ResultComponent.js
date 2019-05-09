@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import ResultNav from "./ResultNav";
 
 const style = {
   container: {
@@ -28,7 +27,6 @@ class ResultComponent extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <ResultNav />
         <div style={style.container}>
           <Card style={style.card}>
             <Card.Img variant="top" src="#" />
