@@ -1,48 +1,49 @@
-import React from "react"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
 
-import SearchNav from "../components/SearchNav"
-import DefaultImg from "../assets/images/default-image.jpeg"
-import Rating from "../assets/thumbnail/five-star.png"
-import styled from "@emotion/styled"
-import { getBestRestaurants } from "../utils/api"
+import SearchNav from "../components/SearchNav";
+import DefaultImg from "../assets/images/default-image.jpeg";
+import Rating from "../assets/thumbnail/five-star.png";
+import styled from "@emotion/styled";
+import { getBestRestaurants } from "../utils/api";
+import { getRestaurantbyDistance } from "../utils/api";
 
 const Container = styled.div`
   background-color: #f5f1e8;
-`
+`;
 
 const Div = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: row;
   flex-wrap: wrap;
-`
+`;
 const Card = styled.div`
   margin: 50px 5px;
   padding: 30px 30px 0px 30px;
   text-align: center;
   border-radius: 30px;
-`
+`;
 
 const H5 = styled.h5`
   margin-top: 20px;
-`
+`;
 
 const Img = styled.img`
   width: 250px;
-`
+`;
 
 const H4 = styled.h4`
   margin: 50px 0px 0px 100px;
-`
+`;
 
 const H44 = styled.h4`
   margin-left: 100px;
-`
+`;
 
 const Star = styled.img`
   width: 100px;
-`
+`;
 
 const best = [
   {
@@ -65,20 +66,28 @@ const best = [
     title: "Default Title",
     rating: Rating
   }
-]
+];
 
 class Search extends React.Component {
   state = {
-    restaurants: []
-  }
+    restaurants: [],
+    nearestRestaurants: []
+  };
 
   componentDidMount() {
     getBestRestaurants().then(response => {
-      console.log(response)
+      console.log(response);
       this.setState({
         restaurants: response
-      })
-    })
+      });
+    });
+
+    getRestaurantbyDistance().then(response => {
+      console.log(response);
+      this.setState({
+        nearestRestaurants: response
+      });
+    });
   }
 
   render() {
@@ -100,7 +109,7 @@ class Search extends React.Component {
                     alt=""
                   />
                 </Card>
-              )
+              );
             })}
           </Div>
         </Container>
@@ -117,7 +126,7 @@ class Search extends React.Component {
                   <H5>{best.title}</H5>
                   <Star src={best.rating} alt="" />
                 </Card>
-              )
+              );
             })}
           </Div>
         </Container>
@@ -125,22 +134,25 @@ class Search extends React.Component {
         <Container>
           <H44>Nearest</H44>
           <Div>
-            {best.map((best, index) => {
+            {this.state.nearestRestaurants.map((item, index) => {
               return (
                 <Card key={index}>
-                  <Link to="/details">
-                    <Img src={best.image} alt="" />
+                  <Link to="/">
+                    <Img src={item.restaurant.featured_image} alt="" />
                   </Link>
-                  <H5>{best.title}</H5>
-                  <Star src={best.rating} alt="" />
+                  <H5>{item.restaurant.name}</H5>
+                  <Star
+                    src={item.restaurant.user_rating.aggregate_rating}
+                    alt=""
+                  />
                 </Card>
-              )
+              );
             })}
           </Div>
         </Container>
       </React.Fragment>
-    )
+    );
   }
 }
 
-export default Search
+export default Search;
