@@ -1,7 +1,7 @@
-import React from "react";
-import { Navbar, Form, Button, FormControl, Image } from "react-bootstrap";
-import Coffee from "../assets/logos/logo-main.svg";
-import { Link } from "react-router-dom";
+import React from "react"
+import { Navbar, Form, Button, FormControl, Image } from "react-bootstrap"
+import Coffee from "../assets/logos/logo-main.svg"
+import { Link } from "react-router-dom"
 
 const style = {
   navBg: {
@@ -24,15 +24,15 @@ const style = {
     border: "none",
     margin: "0px 10px"
   }
-};
+}
 
 export default class SearchNav extends React.Component {
   render() {
     return (
       <Navbar style={style.navBg} expand="lg">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <Link to="/">
-            <Image width="250" src={Coffee} alt="" />
+            <Image width="250" src={Coffee} alt="/" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -50,6 +50,6 @@ export default class SearchNav extends React.Component {
           </Form>
         </Navbar.Collapse>
       </Navbar>
-    );
+    )
   }
 }
