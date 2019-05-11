@@ -19,26 +19,35 @@ const Div = styled.div`
   flex-wrap: wrap;
 `;
 const Card = styled.div`
-  margin: 50px 5px;
-  padding: 30px 30px 0px 30px;
+  margin: 20px 5px;
+  padding: 50px 30px 0px 30px;
   text-align: center;
   border-radius: 30px;
+  width: 275px;
 `;
 
-const H5 = styled.h5`
-  margin-top: 20px;
+const Images = styled.div`
+  height: 150px;
 `;
 
 const Img = styled.img`
-  width: 250px;
+  width: 150px;
+  height: 100%;
 `;
 
 const H4 = styled.h4`
   margin: 50px 0px 0px 100px;
+  color: #4c3a32;
 `;
 
 const H44 = styled.h4`
   margin-left: 100px;
+  color: #4c3a32;
+`;
+
+const H5 = styled.h5`
+  margin-top: 20px;
+  color: #4c3a32;
 `;
 
 const Star = styled.img`
@@ -101,7 +110,9 @@ class Search extends React.Component {
               return (
                 <Card key={index}>
                   <Link to="/details">
-                    <Img src={item.restaurant.featured_image} alt="" />
+                    <Images>
+                      <Img src={item.restaurant.featured_image} alt="" />
+                    </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
                   <Star
@@ -121,7 +132,9 @@ class Search extends React.Component {
               return (
                 <Card key={index}>
                   <Link to="/details">
-                    <Img src={best.image} alt="" />
+                    <Images>
+                      <Img src={best.image} alt="" />
+                    </Images>
                   </Link>
                   <H5>{best.title}</H5>
                   <Star src={best.rating} alt="" />
@@ -137,8 +150,10 @@ class Search extends React.Component {
             {this.state.nearestRestaurants.map((item, index) => {
               return (
                 <Card key={index}>
-                  <Link to="/">
-                    <Img src={item.restaurant.featured_image} alt="" />
+                  <Link to="/details">
+                    <Images>
+                      <Img src={item.restaurant.featured_image} alt="" />
+                    </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
                   <Star
