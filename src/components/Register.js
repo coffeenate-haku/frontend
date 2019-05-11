@@ -39,7 +39,7 @@ class FormRegister extends React.Component {
 
     axios
       .post(API_URL, user)
-      .then(response => console.log(response.data))
+      .then(response => alert(`Anda berhasil log in: ${response.data}`))
       .catch(error => console.log(error))
   }
 
