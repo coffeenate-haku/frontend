@@ -29,7 +29,7 @@ class FormRegister extends React.Component {
   handleSubmit = event => {
     event.preventDefault()
 
-    const API_URL = `http://localhost:5210/users/register`
+    const API_URL = `https://coffeenate-backend-mongoose.herokuapp.com/users/register`
     const user = {
       name: this.state.name,
       username: this.state.username,
