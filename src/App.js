@@ -9,7 +9,7 @@ import Survey3 from "./pages/Survey3";
 import Result from "./pages/Result";
 import Details from "./pages/Details";
 import Dashboard from "./pages/Dashboard";
-import store from "./store";
+// import store from "./store";
 
 function App() {
   return (
