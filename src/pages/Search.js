@@ -31,7 +31,7 @@ const Images = styled.div`
 `;
 
 const Img = styled.img`
-  width: 150px;
+  width: 180px;
   height: 100%;
 `;
 
@@ -50,9 +50,9 @@ const H5 = styled.h5`
   color: #4c3a32;
 `;
 
-const Star = styled.img`
-  width: 100px;
-`;
+// const P = styled.p`
+//   background-color: #4c3a32;
+// `;
 
 const best = [
   {
@@ -80,24 +80,29 @@ const best = [
 class Search extends React.Component {
   state = {
     restaurants: [],
-    nearestRestaurants: []
+    nearestRestaurants: [],
+    searchRestaurants: []
   };
 
   componentDidMount() {
     getBestRestaurants().then(response => {
-      console.log(response);
+      // console.log(response);
       this.setState({
         restaurants: response
       });
     });
 
     getRestaurantbyDistance().then(response => {
-      console.log(response);
+      // console.log(response);
       this.setState({
         nearestRestaurants: response
       });
     });
   }
+
+  // showDetails (){
+  //   this.setState
+  // }
 
   render() {
     return (
@@ -109,16 +114,20 @@ class Search extends React.Component {
             {this.state.restaurants.map((item, index) => {
               return (
                 <Card key={index}>
-                  <Link to="/details">
+                  <Link to="/details" onClick="">
                     <Images>
-                      <Img src={item.restaurant.featured_image} alt="" />
+                      {/* <div>
+                        <p>{item.restaurant.user_rating.aggregate_rating}/5</p>
+                      </div> */}
+                      <Img src={item.restaurant.thumb} alt="" />
                     </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
-                  <Star
-                    src={item.restaurant.user_rating.aggregate_rating}
-                    alt=""
-                  />
+                  <div>
+                    <p>
+                      Rating: {item.restaurant.user_rating.aggregate_rating}/5
+                    </p>
+                  </div>
                 </Card>
               );
             })}
@@ -137,7 +146,7 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{best.title}</H5>
-                  <Star src={best.rating} alt="" />
+                  {/* <Star src={best.rating} alt="" /> */}
                 </Card>
               );
             })}
@@ -152,14 +161,13 @@ class Search extends React.Component {
                 <Card key={index}>
                   <Link to="/details">
                     <Images>
-                      <Img src={item.restaurant.featured_image} alt="" />
+                      <Img src={item.restaurant.thumb} alt="" />
                     </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
-                  <Star
-                    src={item.restaurant.user_rating.aggregate_rating}
-                    alt=""
-                  />
+                  <p>
+                    Rating: {item.restaurant.user_rating.aggregate_rating}/5
+                  </p>
                 </Card>
               );
             })}

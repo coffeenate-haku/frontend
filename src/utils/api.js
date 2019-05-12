@@ -1,7 +1,7 @@
 const axios = require("axios");
 
-const API_STRING = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city&cuisines=1040&establishment_type=1&sort=rating"`;
-const API_STRING_QUERY = `https://developers.zomato.com/api/v2.1/search?entity_id=72939&entity_type=subzone&cuisines=30&establishment_type=1`;
+const API_STRING = `https://developers.zomato.com/api/v2.1/search?entity_id=74&entity_type=city&count=8&cuisines=1040&establishment_type=1&sort=rating"`;
+const API_STRING_QUERY = `https://developers.zomato.com/api/v2.1/search?entity_id=72939&entity_type=subzone&count=8&cuisines=30&establishment_type=1`;
 
 const API_CONFIG = {
   headers: {
