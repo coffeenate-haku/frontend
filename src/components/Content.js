@@ -8,12 +8,15 @@ import What3 from "../assets/thumbnail/what-is-3.png";
 
 const style = {
   container: {
-    margin: "50px 0px"
+    justifyContent: "center",
+    margin: "50px 0px",
+    display: "flex"
   },
 
   heading: {
     textAlign: "center",
-    color: "#4C3A32"
+    color: "#4C3A32",
+    marginTop: "50px"
   },
 
   content: {
@@ -45,68 +48,83 @@ const style = {
 };
 
 export default class Content extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      articles: [
+        {
+          id: 1,
+          title: "Why Coffeenate?",
+          content: [
+            {
+              image: How1,
+              title: "Good Coffee Only",
+              text: "Our recommendation system tells you the best coffee around"
+            },
+            {
+              image: How2,
+              title: "No More Wasted Money",
+              text:
+                "You no longer waste your money on a cup of coffee you dont like"
+            },
+            {
+              image: How3,
+              title: "Find Your Ambience",
+              text: "Easier to find a place to enjoy your type coffee"
+            }
+          ]
+        },
+        {
+          id: 2,
+          title: "How it Works?",
+          content: [
+            {
+              image: What1,
+              title: "Fill out the Survey",
+              text: "Take our survey to know what coffee is your type"
+            },
+            {
+              image: What2,
+              title: "Find The Nearest Coffee",
+              text: "Our search engine will find similar type of your coffee"
+            },
+            {
+              image: What3,
+              title: "Save Your Result",
+              text: "Get matched with your coffee type"
+            }
+          ]
+        }
+      ]
+    };
+  }
+
   render() {
     return (
-      <div style={style.container}>
-        <h2 style={style.heading}>Why Coffeenate?</h2>
-        <div style={style.content}>
-          <div style={style.item}>
-            <img src={How1} alt="" />
-            <div style={style.desc}>
-              <h3>Good Coffee Only</h3>
-              <p style={style.paragraph}>
-                Our recommendation system tells you the best coffee around
-              </p>
-            </div>
-          </div>
-          <div style={style.item}>
-            <img src={How2} alt="" />
-            <div style={style.desc}>
-              <h3>No More Wasted Money</h3>
-              <p style={style.paragraph}>
-                You no longer waste your money on a cup of coffee you dont like
-              </p>
-            </div>
-          </div>
-          <div style={style.item}>
-            <img src={How3} alt="" />
-            <div style={style.desc}>
-              <h3>Find Your Ambience</h3>
-              <p style={style.paragraph}>
-                Easier to find a place to enjoy your type coffee
-              </p>
-            </div>
-          </div>
-        </div>
-        <h2 style={style.heading}>How it Works?</h2>
-        <div style={style.content}>
-          <div style={style.item}>
-            <img src={What1} alt="" />
-            <div style={style.desc}>
-              <h3>Fill out the Survey</h3>
-              <p style={style.paragraph}>
-                Take our survey to know what coffee is your type
-              </p>
-            </div>
-          </div>
-          <div style={style.item}>
-            <img src={What2} alt="" />
-            <div style={style.desc}>
-              <h3>Find The Nearest Coffee</h3>
-              <p style={style.paragraph}>
-                Our search engine will find similar type of your coffee
-              </p>
-            </div>
-          </div>
-          <div style={style.item}>
-            <img src={What3} alt="" />
-            <div style={style.desc}>
-              <h3>Save Your Result</h3>
-              <p style={style.paragraph}>Get matched with your coffee type</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <React.Fragment>
+        {this.state.articles.map((article, index) => {
+          return (
+            <React.Fragment>
+              <h2 style={style.heading}>{article.title}</h2>
+              <div style={style.container} id={article.id} key={index}>
+                {article.content.map((item, i) => {
+                  return (
+                    <div style={style.content} key={i}>
+                      <div style={style.item}>
+                        <img src={item.image} alt="" />
+                        <div style={style.desc}>
+                          <h3>{item.title}</h3>
+                          <p style={style.paragraph}>{item.text}</p>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </React.Fragment>
+          );
+        })}
+      </React.Fragment>
     );
   }
 }
