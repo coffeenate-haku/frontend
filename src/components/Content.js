@@ -104,7 +104,7 @@ export default class Content extends React.Component {
       <React.Fragment>
         {this.state.articles.map((article, index) => {
           return (
-            <React.Fragment>
+            <React.Fragment key={index}>
               <h2 style={style.heading}>{article.title}</h2>
               <div style={style.container} id={article.id} key={index}>
                 {article.content.map((item, i) => {

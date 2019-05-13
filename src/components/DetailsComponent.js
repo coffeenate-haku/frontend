@@ -5,6 +5,8 @@ import { Image } from "react-bootstrap";
 import DefaultImage from "../assets/images/default-image.jpeg";
 import MapImage from "../assets/thumbnail/map-direction.jpg";
 import Footer from "./Footer";
+import { getBestRestaurants } from "../utils/api";
+import { getRestaurantbyDistance } from "../utils/api";
 
 const Main = styled.div`
   background-color: #f5f1e8;
@@ -35,6 +37,20 @@ const style = {
 };
 
 export default class DetailsComponent extends React.Component {
+  componentDidMount() {
+    getBestRestaurants().then(response => {
+      this.setState({
+        restaurants: response
+      });
+    });
+
+    getRestaurantbyDistance().then(response => {
+      this.setState({
+        nearestRestaurants: response
+      });
+    });
+  }
+
   render() {
     return (
       <React.Fragment>
