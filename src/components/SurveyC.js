@@ -65,9 +65,7 @@ class Survey3 extends React.Component {
               <Button style={style.button}>No Topping</Button>
             </div>
             <Link style={style.button} to="/result">
-              <Button style={style.continue} variant="light">
-                Continue
-              </Button>
+              <Button variant="light">Continue</Button>
             </Link>
           </ButtonToolbar>
         </div>
