@@ -50,10 +50,6 @@ const H5 = styled.h5`
   color: #4c3a32;
 `;
 
-// const P = styled.p`
-//   background-color: #4c3a32;
-// `;
-
 const best = [
   {
     image: DefaultImg,
@@ -86,23 +82,17 @@ class Search extends React.Component {
 
   componentDidMount() {
     getBestRestaurants().then(response => {
-      // console.log(response);
       this.setState({
         restaurants: response
       });
     });
 
     getRestaurantbyDistance().then(response => {
-      // console.log(response);
       this.setState({
         nearestRestaurants: response
       });
     });
   }
-
-  // showDetails (){
-  //   this.setState
-  // }
 
   render() {
     return (
@@ -116,9 +106,6 @@ class Search extends React.Component {
                 <Card key={index}>
                   <Link to="/details" onClick="">
                     <Images>
-                      {/* <div>
-                        <p>{item.restaurant.user_rating.aggregate_rating}/5</p>
-                      </div> */}
                       <Img src={item.restaurant.thumb} alt="" />
                     </Images>
                   </Link>
@@ -146,7 +133,6 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{best.title}</H5>
-                  {/* <Star src={best.rating} alt="" /> */}
                 </Card>
               );
             })}
