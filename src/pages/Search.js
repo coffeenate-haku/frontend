@@ -104,7 +104,7 @@ class Search extends React.Component {
             {this.state.restaurants.map((item, index) => {
               return (
                 <Card key={index}>
-                  <Link to="/details" onClick="/">
+                  <Link to="/details" onClick="">
                     <Images>
                       <Img src={item.restaurant.thumb} alt="" />
                     </Images>
