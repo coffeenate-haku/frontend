@@ -62,29 +62,22 @@ export default class DetailsComponent extends React.Component {
           </Jumbotron>
           <Details>
             <Div>
-              {this.state.restaurants.map((item, index) => {
-                return (
-                  <ul>
-                    <li>
-                      <h6>{this.state.restaurants.location.address}</h6>
-                      <p>021-1111-222</p>
-                    </li>
-                    <li>
-                      <h6>Opening Hours</h6>
-                      <p>08.00 am - 16.00 pm</p>
-                    </li>
-                    <li>
-                      <h6>Address</h6>
-                      <p>Jl. Jenggala II No.3, RT.2/RW.1, Selong</p>
-                    </li>
-                  </ul>
-                );
-              })}
-              }
+              <ul>
+                <li>
+                  <h6>Location</h6>
+                  <p>021-1111-222</p>
+                </li>
+                <li>
+                  <h6>Opening Hours</h6>
+                  <p>08.00 am - 16.00 pm</p>
+                </li>
+                <li>
+                  <h6>Address</h6>
+                  <p>Jl. Jenggala II No.3, RT.2/RW.1, Selong</p>
+                </li>
+              </ul>
             </Div>
             <Div>
-              {/* {this.state.restaurants.map((item, index) => {
-                return ( */}
               <ul>
                 <li>
                   <h6>Average Cost</h6>
@@ -95,8 +88,6 @@ export default class DetailsComponent extends React.Component {
                   <p>Western</p>
                 </li>
               </ul>
-              );
-              {/* })} */}
             </Div>
             <Div>
               <ul>
