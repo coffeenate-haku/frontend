@@ -1,5 +1,8 @@
 const initialState = {
-  details: ""
+  name: null,
+  photos_url: null,
+  address: null,
+  city: null
 };
 
 export default (state = initialState, action) => {
@@ -7,7 +10,7 @@ export default (state = initialState, action) => {
     case "details":
       return {
         ...state,
-        search: action.payload
+        ...action.payload
       };
     default:
       return state;

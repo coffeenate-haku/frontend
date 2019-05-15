@@ -58,7 +58,7 @@ export default class DetailsComponent extends React.Component {
         <Main>
           <Jumbotron>
             <Image src={DefaultImage} style={style.img} />
-            <h3>{}</h3>
+            <h3>Default Name</h3>
           </Jumbotron>
           <Details>
             <Div>
@@ -66,7 +66,7 @@ export default class DetailsComponent extends React.Component {
                 return (
                   <ul>
                     <li>
-                      <h6>Phone</h6>
+                      <h6>{this.state.restaurants.location.address}</h6>
                       <p>021-1111-222</p>
                     </li>
                     <li>
@@ -80,22 +80,23 @@ export default class DetailsComponent extends React.Component {
                   </ul>
                 );
               })}
+              }
             </Div>
             <Div>
-              {this.state.restaurants.map((item, index) => {
-                return (
-                  <ul>
-                    <li>
-                      <h6>Average Cost</h6>
-                      <p>Rp. 50.000 - Rp. 100.000</p>
-                    </li>
-                    <li>
-                      <h6>Type of Cuisine</h6>
-                      <p>Western</p>
-                    </li>
-                  </ul>
-                );
-              })}
+              {/* {this.state.restaurants.map((item, index) => {
+                return ( */}
+              <ul>
+                <li>
+                  <h6>Average Cost</h6>
+                  <p>Rp. 50.000 - Rp. 100.000</p>
+                </li>
+                <li>
+                  <h6>Type of Cuisine</h6>
+                  <p>Western</p>
+                </li>
+              </ul>
+              );
+              {/* })} */}
             </Div>
             <Div>
               <ul>

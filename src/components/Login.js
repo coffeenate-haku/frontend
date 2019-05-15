@@ -1,7 +1,9 @@
 import React from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import styled from "@emotion/styled";
-import axios from "axios";
+// import axios from "axios";
+import { connect } from "react-redux";
+import { login } from "../redux/actions/profileAction";
 
 const Container = styled.div`
   display: grid;
@@ -31,7 +33,7 @@ const validateEmail = values => {
   return errors;
 };
 
-export const FormikForm = () => {
+const Login = props => {
   return (
     <Container>
       <h1>Login</h1>
@@ -39,18 +41,19 @@ export const FormikForm = () => {
         initialValues={{ email: "", password: "" }}
         validate={validateEmail}
         onSubmit={(values, { setSubmitting }) => {
-          const API_URL = `https://coffeenate-backend-mongoose.herokuapp.com/users/login`;
           const userLogin = {
             email: values.email,
             password: values.password
           };
 
-          axios
-            .post(API_URL, userLogin)
-            .then(response => console.log(response))
-            .catch(error => console.log(error));
+          props.login(userLogin);
 
-          setSubmitting(false);
+          // axios
+          //   .post(API_URL, userLogin)
+          //   .then(response => console.log(response))
+          //   .catch(error => console.log(error));
+
+          // setSubmitting(false);
         }}
       >
         {({ isSubmitting }) => (
@@ -82,3 +85,8 @@ export const FormikForm = () => {
     </Container>
   );
 };
+
+export default connect(
+  null,
+  { login }
+)(Login);

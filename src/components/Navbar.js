@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import styled from "@emotion/styled";
 import "../index.css";
+import { connect } from "react-redux";
 
 import Coffee from "../assets/logos/logo-main.svg";
 import {
@@ -14,7 +15,7 @@ import {
   Navbar,
   Image
 } from "react-bootstrap";
-import { FormikForm } from "../components/Login";
+import Login from "../components/Login";
 import modal from "../assets/thumbnail/modal.jpg";
 import FormRegister from "../components/Register";
 
@@ -106,13 +107,19 @@ class Navigation extends React.Component {
               <NavLink to="/search" style={style.link}>
                 Search
               </NavLink>
-              <NavLink
-                to="/"
-                onClick={this.handleShow}
-                style={style.specialLink}
-              >
-                Sign in
-              </NavLink>
+              {this.props.isAuthenticated ? (
+                <NavLink to="/dashboard">
+                  <h1>Profile</h1>
+                </NavLink>
+              ) : (
+                <NavLink
+                  to="/"
+                  onClick={this.handleShow}
+                  style={style.specialLink}
+                >
+                  Sign in
+                </NavLink>
+              )}
             </LinkNav>
           </Div>
         </Navbar.Collapse>
@@ -135,7 +142,7 @@ class Navigation extends React.Component {
                       <Image src={modal} alt="modal" style={style.img} />
                     </Col>
                     <Col xs={12} md={4} style={style.col}>
-                      <FormikForm />
+                      <Login />
                     </Col>
                   </Row>
                 </Container>
@@ -166,4 +173,11 @@ class Navigation extends React.Component {
   }
 }
 
-export default Navigation;
+const mapStateToProps = store => ({
+  isAuthenticated: store.profile.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Navigation);

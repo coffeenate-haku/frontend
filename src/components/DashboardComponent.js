@@ -7,6 +7,7 @@ import HomeIcon from "../assets/thumbnail/home.png";
 import Location from "../assets/thumbnail/location.png";
 import Heart from "../assets/thumbnail/heart.png";
 import Account from "../assets/thumbnail/account.png";
+import { connect } from "react-redux";
 
 const style = {
   div: {
@@ -57,11 +58,10 @@ class DashboardComponent extends React.Component {
               <Image width="150" src={Avatar} alt="" />
             </div>
             <div style={style.details}>
-              <h1>Hi, Zein Ahmad</h1>
-              <p>zayn.ahmad@gmail.com</p>
+              <h1>Hi, {this.props.name}</h1>
+              <p>{this.props.email}</p>
             </div>
             <ResultComponent />
-
             <div style={style.menu}>
               <div style={style.icon}>
                 <div>
@@ -94,4 +94,13 @@ class DashboardComponent extends React.Component {
     );
   }
 }
-export default DashboardComponent;
+
+const mapStateToProps = store => ({
+  name: store.profile.name,
+  email: store.profile.email
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(DashboardComponent);
