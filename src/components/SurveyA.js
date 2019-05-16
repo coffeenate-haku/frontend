@@ -1,5 +1,4 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
 
 export default class SurveyCoffee extends React.Component {
   state = {
@@ -58,9 +57,7 @@ export default class SurveyCoffee extends React.Component {
   }
 
   render() {
-    return coffeeArray != null ? (
-      <Redirect to="/survey/2" />
-    ) : (
+    return (
       <form onSubmit={this.onSubmit}>
         {this.renderCoffeeTypes()}
         <input type="submit" value="Continue" onClick={this.onSubmit} />
