@@ -64,28 +64,37 @@ class DashboardComponent extends React.Component {
             <ResultComponent />
             <div style={style.menu}>
               <div style={style.icon}>
-                <div>
-                  <Image width="30" src={HomeIcon} />
-                </div>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/">
+                  <div>
+                    <Image width="30" src={HomeIcon} />
+                  </div>
+                  Home
+                </NavLink>
+              </div>
+
+              <div style={style.icon}>
+                <NavLink to="/search">
+                  <div style={style.iconimg}>
+                    <Image width="30" src={Location} />
+                  </div>
+                  Find Coffee
+                </NavLink>
               </div>
               <div style={style.icon}>
-                <div style={style.iconimg}>
-                  <Image width="30" src={Location} />
-                </div>
-                <NavLink to="/search">Find Coffee</NavLink>
+                <NavLink to="/">
+                  <div style={style.iconimg}>
+                    <Image width="30" src={Heart} />
+                  </div>
+                  Favorite
+                </NavLink>
               </div>
               <div style={style.icon}>
-                <div style={style.iconimg}>
-                  <Image width="30" src={Heart} />
-                </div>
-                <NavLink to="/">Favorite</NavLink>
-              </div>
-              <div style={style.icon}>
-                <div style={style.iconimg}>
-                  <Image width="30" src={Account} />
-                </div>
-                <NavLink to="/">Account</NavLink>
+                <NavLink to="/">
+                  <div style={style.iconimg}>
+                    <Image width="30" src={Account} />
+                  </div>
+                  Account
+                </NavLink>
               </div>
             </div>
           </div>

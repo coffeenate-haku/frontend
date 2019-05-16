@@ -102,17 +102,18 @@ export default class SurveyCoffee extends React.Component {
             <div style={style.container}>
               <p>4 of 6</p>
               <p>Which foam level do you prefer?</p>
-              <NavLink to="/survey/5">
-                <form onSubmit={this.onSubmit}>
-                  {this.renderCoffeeTypes()}
+              <form onSubmit={this.onSubmit}>
+                {this.renderCoffeeTypes()}
+                <NavLink to="/survey/5">
                   <input
                     style={style.continuebutton}
                     type="submit"
                     value="Continue"
                     onClick={this.onSubmit}
                   />
-                </form>
-              </NavLink>
+                  skip
+                </NavLink>
+              </form>
             </div>
           </div>
         </div>
