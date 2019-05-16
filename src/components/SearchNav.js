@@ -1,16 +1,23 @@
 import React from "react";
-import { Navbar, Form, Button, FormControl, Image } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
 import Coffee from "../assets/logos/logo-main.svg";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 const style = {
   navBg: {
     backgroundColor: "#f5f1e8"
   },
 
+  menu: {
+    paddingRight: "300px"
+  },
+
   form: {
     width: "600px"
   },
+
   nav: {
     display: "flex",
     justifyContent: "flex-end",
@@ -19,37 +26,48 @@ const style = {
   p: {
     margin: "auto 20px"
   },
-  button: {
-    backgroundColor: "#4c3a32",
-    border: "none",
-    margin: "0px 10px"
+  link: {
+    color: "#4C3A32",
+    fontSize: "24px",
+    width: "800px"
   }
 };
 
-export default class SearchNav extends React.Component {
+class SearchNav extends React.Component {
   render() {
     return (
-      <Navbar style={style.navBg} expand="lg">
-        <Navbar.Brand>
-          <Link to="/">
-            <Image width="250" src={Coffee} alt="/" />
-          </Link>
-        </Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" />
-        <Navbar.Collapse style={style.nav} id="basic-navbar-nav">
-          <p style={style.p}>Filter:</p>
-          <Form inline>
-            <FormControl
-              style={style.form}
-              type="text"
-              placeholder="Search"
-              className="mr-sm-2"
-            />
-            <Button style={style.button}>Type</Button>
-            <Button style={style.button}>Price</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Navbar>
+      <Navbar.Toggle>
+        <Navbar style={style.navBg} expand="lg">
+          <NavLink to="/">
+            <Navbar.Brand>
+              <img
+                style={style.logo}
+                alt=""
+                src={Coffee}
+                width="300"
+                className="d-inline-block align-top"
+              />
+            </Navbar.Brand>
+          </NavLink>
+
+          {this.props.isAuthenticated ? (
+            <NavLink to="/dashboard" style={style.link}>
+              Profile
+            </NavLink>
+          ) : (
+            <NavLink style={style.link} />
+          )}
+        </Navbar>
+      </Navbar.Toggle>
     );
   }
 }
+
+const mapStateToProps = store => ({
+  isAuthenticated: store.profile.isAuthenticated
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(SearchNav);

@@ -54,8 +54,8 @@ export default class DetailsComponent extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <SearchNav />
         <Main>
+          <SearchNav />
           <Jumbotron>
             <Image src={DefaultImage} style={style.img} />
             <h3>Default Name</h3>

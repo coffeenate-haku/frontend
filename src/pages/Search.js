@@ -10,6 +10,7 @@ import { getRestaurantbyDistance } from "../utils/api";
 
 const Container = styled.div`
   background-color: #f5f1e8;
+  margin: auto 0px;
 `;
 
 const Div = styled.div`
@@ -36,7 +37,7 @@ const Img = styled.img`
 `;
 
 const H4 = styled.h4`
-  margin: 50px 0px 0px 100px;
+  margin: 0px 0px 0px 100px;
   color: #4c3a32;
 `;
 
