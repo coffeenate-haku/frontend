@@ -43,16 +43,15 @@ const style = {
 
 export default class SurveyCoffee extends React.Component {
   state = {
-    coffeeTypes: {
-      Black: false,
-      Cream: false,
-      Sugar: false,
-      Decaf: false
+    foamTypes: {
+      0: false,
+      1: false,
+      2: false
     }
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.coffeeTypes;
+    let coffees = this.state.foamTypes;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
@@ -63,8 +62,8 @@ export default class SurveyCoffee extends React.Component {
     e.preventDefault();
     const coffeeArray = [];
 
-    Object.keys(this.state.coffeeTypes).forEach((key, index) => {
-      if (this.state.coffeeTypes[key]) {
+    Object.keys(this.state.foamTypes).forEach((key, index) => {
+      if (this.state.foamTypes[key]) {
         coffeeArray.push(key);
       }
     });
@@ -79,14 +78,14 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.coffeeTypes).map((key, index) => {
+    return Object.keys(this.state.foamTypes).map((key, index) => {
       return (
         <div>
           <input
             key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.coffeeTypes[key]}
+            checked={this.state.foamTypes[key]}
             value={key}
           />
           {key}
@@ -101,20 +100,19 @@ export default class SurveyCoffee extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>1 of 6</p>
-              <p>How do you take your coffee?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <NavLink to="/survey/2">
+              <p>4 of 6</p>
+              <p>Which foam level do you prefer?</p>
+              <NavLink to="/survey/5">
+                <form onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
                   <input
                     style={style.continuebutton}
                     type="submit"
                     value="Continue"
                     onClick={this.onSubmit}
                   />
-                  skip
-                </NavLink>
-              </form>
+                </form>
+              </NavLink>
             </div>
           </div>
         </div>

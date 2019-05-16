@@ -43,16 +43,16 @@ const style = {
 
 export default class SurveyCoffee extends React.Component {
   state = {
-    coffeeTypes: {
-      Black: false,
-      Cream: false,
-      Sugar: false,
-      Decaf: false
+    flavorTypes: {
+      Earthly: false,
+      Chocolate: false,
+      BrownSugar: false,
+      ToastedNut: false
     }
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.coffeeTypes;
+    let coffees = this.state.flavorTypes;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
@@ -63,8 +63,8 @@ export default class SurveyCoffee extends React.Component {
     e.preventDefault();
     const coffeeArray = [];
 
-    Object.keys(this.state.coffeeTypes).forEach((key, index) => {
-      if (this.state.coffeeTypes[key]) {
+    Object.keys(this.state.flavorTypes).forEach((key, index) => {
+      if (this.state.flavorTypes[key]) {
         coffeeArray.push(key);
       }
     });
@@ -79,14 +79,14 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.coffeeTypes).map((key, index) => {
+    return Object.keys(this.state.flavorTypes).map((key, index) => {
       return (
         <div>
           <input
             key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.coffeeTypes[key]}
+            checked={this.state.flavorTypes[key]}
             value={key}
           />
           {key}
@@ -101,20 +101,19 @@ export default class SurveyCoffee extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>1 of 6</p>
-              <p>How do you take your coffee?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <NavLink to="/survey/2">
+              <p>6 of 6</p>
+              <p>Which flavor do you prefer with your coffee?</p>
+              <NavLink to="/survey/5">
+                <form onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
                   <input
                     style={style.continuebutton}
                     type="submit"
                     value="Continue"
                     onClick={this.onSubmit}
                   />
-                  skip
-                </NavLink>
-              </form>
+                </form>
+              </NavLink>
             </div>
           </div>
         </div>

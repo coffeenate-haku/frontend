@@ -1,6 +1,5 @@
 import React from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const style = {
   main: {
@@ -31,47 +30,96 @@ const style = {
 
   button: {
     backgroundColor: "#4c3a32",
-    width: "120px",
+    fontColor: "#f4f0e5",
+    width: "150px",
     margin: "15px"
   },
 
-  continue: {
-    width: "90px",
-    margin: "15px",
-    justifyContent: "center"
+  continuebutton: {
+    width: "100px",
+    margin: "15px"
   }
 };
 
-class Survey3 extends React.Component {
+export default class SurveyCoffee extends React.Component {
+  state = {
+    bodyTypes: {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false
+    }
+  };
+
+  handleCheckChieldElement = event => {
+    let coffees = this.state.bodyTypes;
+    Object.keys(coffees).forEach(coffee => {
+      if (coffee === event.target.value) coffees[coffee] = event.target.checked;
+    });
+    this.setState({ coffees }, console.log(this.state));
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const coffeeArray = [];
+
+    Object.keys(this.state.bodyTypes).forEach((key, index) => {
+      if (this.state.bodyTypes[key]) {
+        coffeeArray.push(key);
+      }
+    });
+
+    console.log(coffeeArray);
+  };
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+
+  renderCoffeeTypes() {
+    return Object.keys(this.state.bodyTypes).map((key, index) => {
+      return (
+        <div>
+          <input
+            key={index}
+            onChange={this.handleCheckChieldElement}
+            type="checkbox"
+            checked={this.state.bodyTypes[key]}
+            value={key}
+          />
+          {key}
+        </div>
+      );
+    });
+  }
+
   render() {
     return (
-      <div style={style.main}>
-        <div style={style.mobile}>
-          <div style={style.container}>
-            <p>3 of 3</p>
-            <h5>Which flavors do you most enjoy in your coffee?</h5>
+      <React.Fragment>
+        <div style={style.main}>
+          <div style={style.mobile}>
+            <div style={style.container}>
+              <p>3 of 6</p>
+              <p>How light or bold do you like your cofee?</p>
+              <form onSubmit={this.onSubmit}>
+                {this.renderCoffeeTypes()}
+                <NavLink to="/survey/4">
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                  skip
+                </NavLink>
+              </form>
+            </div>
           </div>
-          <ButtonToolbar style={style.toolbar}>
-            <div>
-              <Button style={style.button}>Brown Sugar</Button>
-              <Button style={style.button}>Hazelnut</Button>
-            </div>
-            <div>
-              <Button style={style.button}>Floral</Button>
-              <Button style={style.button}>Caramel</Button>
-            </div>
-            <div>
-              <Button style={style.button}>Chocolate</Button>
-              <Button style={style.button}>No Topping</Button>
-            </div>
-            <Link style={style.button} to="/result">
-              <Button variant="light">Continue</Button>
-            </Link>
-          </ButtonToolbar>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
-
-export default Survey3;

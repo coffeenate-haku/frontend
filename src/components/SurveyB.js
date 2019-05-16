@@ -1,6 +1,5 @@
 import React from "react";
-import { ButtonToolbar, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const style = {
   main: {
@@ -37,33 +36,88 @@ const style = {
   },
 
   continuebutton: {
-    width: "150px",
+    width: "100px",
     margin: "15px"
   }
 };
 
-class Survey2 extends React.Component {
+export default class SurveyCoffee extends React.Component {
+  state = {
+    sweetnessTypes: {
+      noSugar: false,
+      lessSugar: false,
+      sweet: false
+    }
+  };
+
+  handleCheckChieldElement = event => {
+    let coffees = this.state.sweetnessTypes;
+    Object.keys(coffees).forEach(coffee => {
+      if (coffee === event.target.value) coffees[coffee] = event.target.checked;
+    });
+    this.setState({ coffees }, console.log(this.state));
+  };
+
+  onSubmit = e => {
+    e.preventDefault();
+    const coffeeArray = [];
+
+    Object.keys(this.state.sweetnessTypes).forEach((key, index) => {
+      if (this.state.sweetnessTypes[key]) {
+        coffeeArray.push(key);
+      }
+    });
+
+    console.log(coffeeArray);
+  };
+
+  setRedirect = () => {
+    this.setState({
+      redirect: true
+    });
+  };
+
+  renderCoffeeTypes() {
+    return Object.keys(this.state.sweetnessTypes).map((key, index) => {
+      return (
+        <div>
+          <input
+            key={index}
+            onChange={this.handleCheckChieldElement}
+            type="checkbox"
+            checked={this.state.sweetnessTypes[key]}
+            value={key}
+          />
+          {key}
+        </div>
+      );
+    });
+  }
+
   render() {
     return (
-      <div style={style.main}>
-        <div style={style.mobile}>
-          <div style={style.container}>
-            <p>2 of 3</p>
-            <h5>Which type of sweetness do you prefer?</h5>
+      <React.Fragment>
+        <div style={style.main}>
+          <div style={style.mobile}>
+            <div style={style.container}>
+              <p>2 of 6</p>
+              <p>Which sweetness level you prefer the most?</p>
+              <form onSubmit={this.onSubmit}>
+                {this.renderCoffeeTypes()}
+                <NavLink to="/survey/3">
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                  skip
+                </NavLink>
+              </form>
+            </div>
           </div>
-          <ButtonToolbar style={style.toolbar}>
-            <Button style={style.button}>Sugar</Button>
-            <Button style={style.button}>Less Sugar</Button>
-            <Link to="/survey/3">
-              <Button style={style.continuebutton} variant="light">
-                Continue
-              </Button>
-            </Link>
-          </ButtonToolbar>
         </div>
-      </div>
+      </React.Fragment>
     );
   }
 }
-
-export default Survey2;
