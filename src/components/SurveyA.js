@@ -4,7 +4,8 @@ import { NavLink } from "react-router-dom";
 const style = {
   main: {
     backgroundColor: "#F4F0E5",
-    padding: "50px 0 100px 0"
+    padding: "50px 0 150px 0",
+    height: "100%"
   },
 
   mobile: {

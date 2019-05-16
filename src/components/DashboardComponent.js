@@ -13,7 +13,9 @@ const style = {
   div: {
     margin: "0 auto",
     alignItem: "center",
-    paddingLeft: "500px"
+    paddingLeft: "500px",
+    height: "100%",
+    backgroundColor: "#f5f1e8"
   },
 
   container: {
@@ -23,20 +25,21 @@ const style = {
   },
 
   image: {
-    paddingLeft: "120px",
-    marginTop: "90px"
+    paddingLeft: "140px",
+    marginTop: "10px",
+    marginBottom: "0px"
   },
 
   details: {
     paddingLeft: "70px",
-    marginTop: "80px"
+    marginTop: "20px"
   },
 
   menu: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around",
-    marginTop: "50px"
+    marginTop: "25px"
   },
 
   icon: {
@@ -44,6 +47,7 @@ const style = {
     flexDirection: "column",
     textAlign: "center",
     alignItem: "center",
+    marginTop: "auto",
     width: "80px"
   }
 };
@@ -53,49 +57,47 @@ class DashboardComponent extends React.Component {
     return (
       <div style={style.div}>
         <Card style={style.container}>
-          <div>
-            <div style={style.image}>
-              <Image width="150" src={Avatar} alt="" />
+          <div style={style.image}>
+            <Image width="120" src={Avatar} alt="" />
+          </div>
+          <div style={style.details}>
+            <p>{this.props.name}</p>
+            <p>{this.props.email}</p>
+          </div>
+          <ResultComponent />
+          <div style={style.menu}>
+            <div style={style.icon}>
+              <NavLink to="/">
+                <div>
+                  <Image width="30" src={HomeIcon} />
+                </div>
+                Home
+              </NavLink>
             </div>
-            <div style={style.details}>
-              <h1>Hi, {this.props.name}</h1>
-              <p>{this.props.email}</p>
-            </div>
-            <ResultComponent />
-            <div style={style.menu}>
-              <div style={style.icon}>
-                <NavLink to="/">
-                  <div>
-                    <Image width="30" src={HomeIcon} />
-                  </div>
-                  Home
-                </NavLink>
-              </div>
 
-              <div style={style.icon}>
-                <NavLink to="/search">
-                  <div style={style.iconimg}>
-                    <Image width="30" src={Location} />
-                  </div>
-                  Find Coffee
-                </NavLink>
-              </div>
-              <div style={style.icon}>
-                <NavLink to="/">
-                  <div style={style.iconimg}>
-                    <Image width="30" src={Heart} />
-                  </div>
-                  Favorite
-                </NavLink>
-              </div>
-              <div style={style.icon}>
-                <NavLink to="/">
-                  <div style={style.iconimg}>
-                    <Image width="30" src={Account} />
-                  </div>
-                  Account
-                </NavLink>
-              </div>
+            <div style={style.icon}>
+              <NavLink to="/search">
+                <div style={style.iconimg}>
+                  <Image width="30" src={Location} />
+                </div>
+                Find Coffee
+              </NavLink>
+            </div>
+            <div style={style.icon}>
+              <NavLink to="/">
+                <div style={style.iconimg}>
+                  <Image width="30" src={Heart} />
+                </div>
+                Favorite
+              </NavLink>
+            </div>
+            <div style={style.icon}>
+              <NavLink to="/">
+                <div style={style.iconimg}>
+                  <Image width="30" src={Account} />
+                </div>
+                Account
+              </NavLink>
             </div>
           </div>
         </Card>

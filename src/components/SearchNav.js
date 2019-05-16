@@ -55,7 +55,7 @@ class SearchNav extends React.Component {
               Profile
             </NavLink>
           ) : (
-            <NavLink style={style.link} />
+            <NavLink />
           )}
         </Navbar>
       </Navbar.Toggle>
