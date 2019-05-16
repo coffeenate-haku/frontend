@@ -99,29 +99,6 @@ class Search extends React.Component {
       <React.Fragment>
         <Container>
           <SearchNav />
-          <H4>Best Seller</H4>
-          <Div>
-            {this.state.restaurants.map((item, index) => {
-              return (
-                <Card key={index}>
-                  <Link to="/details" onClick="">
-                    <Images>
-                      <Img src={item.restaurant.thumb} alt="" />
-                    </Images>
-                  </Link>
-                  <H5>{item.restaurant.name}</H5>
-                  <div>
-                    <p>
-                      Rating: {item.restaurant.user_rating.aggregate_rating}/5
-                    </p>
-                  </div>
-                </Card>
-              );
-            })}
-          </Div>
-        </Container>
-
-        <Container>
           <H44>Recommendation</H44>
           <Div>
             {best.map((best, index) => {
@@ -133,6 +110,29 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{best.title}</H5>
+                </Card>
+              );
+            })}
+          </Div>
+        </Container>
+
+        <Container>
+          <H4>Best Seller</H4>
+          <Div>
+            {this.state.restaurants.map((item, index) => {
+              return (
+                <Card key={index}>
+                  <Link to="/details" onClick>
+                    <Images>
+                      <Img src={item.restaurant.thumb} alt="" />
+                    </Images>
+                  </Link>
+                  <H5>{item.restaurant.name}</H5>
+                  <div>
+                    <p>
+                      Rating: {item.restaurant.user_rating.aggregate_rating}/5
+                    </p>
+                  </div>
                 </Card>
               );
             })}

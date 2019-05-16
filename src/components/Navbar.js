@@ -108,8 +108,8 @@ class Navigation extends React.Component {
                 Search
               </NavLink>
               {this.props.isAuthenticated ? (
-                <NavLink to="/dashboard">
-                  <h1>Profile</h1>
+                <NavLink to="/dashboard" style={style.link}>
+                  Profile
                 </NavLink>
               ) : (
                 <NavLink
