@@ -1,7 +1,8 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
-import coffee from "../assets/images/espresso.jpg";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { getRecommendation } from "../redux/actions/getRecommendation";
 
 const style = {
   container: {
@@ -27,23 +28,33 @@ const style = {
 };
 
 class ResultComponent extends React.Component {
-  state = {
-    name: "",
-    description: ""
-  };
+  // state = {
+  //   coffeeRecommendations: []
+  // };
+
+  componentDidMount() {
+   this.props.getRecommendation(this.props.id)
+  }
 
   render() {
+    const recommendations = this.props.recommendation && this.props.recommendation.map(
+      (item, index) => {
+        return (
+          <div style={style.container} key={index}>
+            <Card style={style.card}>
+              <Card.Img variant="top" src={item.image} alt="" />
+              <Card.Body>
+                <h5>You got {item.name}</h5>
+                <p>{item.descriptions}</p>
+              </Card.Body>
+            </Card>
+          </div>
+        );
+      }
+    );
     return (
       <div>
-        <div style={style.container}>
-          <Card style={style.card}>
-            <Card.Img variant="top" src={coffee} />
-            <Card.Body>
-              <h5>You got espresso</h5>
-              <p>Description</p>
-            </Card.Body>
-          </Card>
-        </div>
+        {recommendations}
         <div style={style.button}>
           <NavLink to="/search">
             <Button variant="primary">See restaurants that matches you</Button>
@@ -54,4 +65,15 @@ class ResultComponent extends React.Component {
   }
 }
 
-export default ResultComponent;
+const mapStatetoProps = state => {
+  console.log(state);
+  return {
+    id: state.profile.id,
+    recommendation: state.recommendation.recommendation.data
+  };
+};
+
+export default connect(
+  mapStatetoProps,
+  { getRecommendation }
+)(ResultComponent);

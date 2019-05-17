@@ -166,7 +166,9 @@ class Search extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({});
+const mapStateToProps = state => {
+  console.log(state)
+};
 
 export default connect(
   mapStateToProps,

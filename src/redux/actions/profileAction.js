@@ -3,7 +3,8 @@ import axios from "axios";
 export const login = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_API_URL}/users/login`, data) //api login
-    .then(({ data: { token, user: { email, name } } }) => {
+    .then(({ data: { token, user: { email, name, id } } }) => {
+      console.log(id);
       const payload = {
         token,
         email,
