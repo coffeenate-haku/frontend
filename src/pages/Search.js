@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import SearchNav from "../components/SearchNav";
+import ResultNav from "../components/ResultNav";
 import DefaultImg from "../assets/images/default-image.jpeg";
 import Rating from "../assets/thumbnail/five-star.png";
 import styled from "@emotion/styled";
@@ -100,7 +100,7 @@ class Search extends React.Component {
     return (
       <React.Fragment>
         <Container>
-          <SearchNav />
+          <ResultNav />
           <H44>Recommendation</H44>
           <Div>
             {best.map((best, index) => {
