@@ -2,8 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import ResultNav from "../components/ResultNav";
-import DefaultImg from "../assets/images/default-image.jpeg";
-import Rating from "../assets/thumbnail/five-star.png";
 import styled from "@emotion/styled";
 import { getBestRestaurants } from "../utils/api";
 import { getRestaurantbyDistance } from "../utils/api";
@@ -51,29 +49,6 @@ const H5 = styled.h5`
   margin-top: 20px;
   color: #4c3a32;
 `;
-
-const best = [
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  }
-];
 
 class Search extends React.Component {
   state = {
