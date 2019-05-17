@@ -46,7 +46,7 @@ class FormRegister extends React.Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>Create Accounts</h1>
+        <h2>Create Accounts</h2>
         <fieldset>
           <Input
             placeholder="Name"

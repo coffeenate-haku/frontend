@@ -36,7 +36,7 @@ const validateEmail = values => {
 const Login = props => {
   return (
     <Container>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={validateEmail}
