@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleFoamLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   main: {
@@ -10,16 +13,32 @@ const style = {
   },
 
   mobile: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#FFFFFF",
     width: "375px",
-    height: "500px",
+    minHeight: "500px",
     margin: "auto"
   },
 
   container: {
-    paddingTop: "100px",
+    padding: "50px 0px",
     textAlign: "center",
-    topMargin: "20px"
+    topMargin: "20px",
+    fontSize: "24px"
+  },
+
+  p: {
+    fontSize: "16px"
+  },
+
+  form: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
+  },
+
+  text: {
+    textAlign: "left",
+    margin: "0 auto"
   },
 
   toolbar: {
@@ -38,10 +57,28 @@ const style = {
   },
 
   continuebutton: {
-    width: "100px",
-    margin: "15px"
+    width: "200px",
+    margin: "10px"
   }
 };
+
+const StyledOption = styled.div`
+  padding: 10px 20px;
+  background: #f4f0e5;
+  margin: 10px;
+  color: #4c3a32;
+  width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :hover {
+    background: rgb(122, 79, 59);
+    cursor: pointer;
+    color: #f4f0e5;
+  }
+`;
 
 class FoamLevelSurvey extends React.Component {
   state = {
@@ -81,18 +118,24 @@ class FoamLevelSurvey extends React.Component {
     });
   };
 
+  handleOptionPressed = key => {
+    this.setState({
+      foamLevel: {
+        ...this.state.foamLevel,
+        [key]: !this.state.foamLevel[key]
+      }
+    });
+  };
+
   renderCoffeeTypes() {
     return Object.keys(this.state.foamLevel).map((key, index) => {
       return (
-        <div key={index}>
-          <input
-            onChange={this.handleCheckChieldElement}
-            type="checkbox"
-            checked={this.state.foamLevel[key]}
-            value={key}
-          />
-          {key}
-        </div>
+        <StyledOption key={index} onClick={() => this.handleOptionPressed(key)}>
+          <span>{key}</span>
+          {this.state.foamLevel[key] && (
+            <FontAwesomeIcon icon={faCheckCircle} />
+          )}
+        </StyledOption>
       );
     });
   }
@@ -103,17 +146,19 @@ class FoamLevelSurvey extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>4 of 6</p>
+              <p style={style.p}>4 of 6</p>
               <p>Which foam level do you prefer?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
-              </form>
+              <div style={style.form}>
+                <form style={style.text} onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

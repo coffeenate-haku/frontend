@@ -22,7 +22,7 @@ export default class ResultNav extends React.Component {
     return (
       <Navbar style={style.navBg} expand="lg">
         <Navbar.Brand>
-          <Link to="/dashboard">
+          <Link to="/">
             <Image width="250" src={Coffee} alt="" />
           </Link>
         </Navbar.Brand>
