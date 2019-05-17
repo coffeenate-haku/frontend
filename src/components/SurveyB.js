@@ -1,6 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 import { handleSugarLevelSurvey } from "../redux/actions/handleSurvey";
 
@@ -65,19 +66,19 @@ class SurveyCoffee extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const sugarLevelResults = [];
 
-    Object.keys(this.state.sweetnessTypes).forEach((key, index) => {
+    await Object.keys(this.state.sweetnessTypes).forEach((key, index) => {
       if (this.state.sweetnessTypes[key]) {
         sugarLevelResults.push(key);
       }
     });
 
-    this.props.handleSugarLevelSurvey(sugarLevelResults)
+    await this.props.handleSugarLevelSurvey(sugarLevelResults);
 
-    console.log(sugarLevelResults);
+    this.props.history.push("/survey/3");
   };
 
   setRedirect = () => {
@@ -140,4 +141,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleSugarLevelSurvey }
-)(SurveyCoffee);
+)(withRouter(SurveyCoffee));
