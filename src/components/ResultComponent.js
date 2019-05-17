@@ -69,7 +69,7 @@ const mapStatetoProps = state => {
   console.log(state);
   return {
     id: state.profile.id,
-    recommendation: state.recommendation.recommendation.data
+    recommendation: state.recommendation.recommendation
   };
 };
 

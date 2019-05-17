@@ -8,9 +8,10 @@ export const getRecommendation = payload => dispatch => {
       }
     })
     .then(results => {
+      console.log(results.data)
       dispatch({
         type: "GET_RECOMMENDATION",
-        payload: results
+        payload: results.data
       });
     });
 };
