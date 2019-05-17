@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleBodyLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -62,18 +62,18 @@ class BodyLevelSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const bodyLevelResult = [];
 
-    Object.keys(this.state.bodyLevel).forEach((key, index) => {
+    await Object.keys(this.state.bodyLevel).forEach((key, index) => {
       if (this.state.bodyLevel[key]) {
         bodyLevelResult.push(key);
       }
     });
 
     this.props.handleBodyLevelSurvey(bodyLevelResult);
-    console.log(bodyLevelResult);
+    this.props.history.push("/survey/4");
   };
 
   setRedirect = () => {
@@ -109,15 +109,12 @@ class BodyLevelSurvey extends React.Component {
               <p>How light or bold do you like your cofee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/4">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -136,4 +133,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleBodyLevelSurvey }
-)(BodyLevelSurvey);
+)(withRouter(BodyLevelSurvey));

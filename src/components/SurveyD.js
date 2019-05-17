@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleFoamLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -60,18 +60,18 @@ class FoamLevelSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const foamLevelResult = [];
 
-    Object.keys(this.state.foamLevel).forEach((key, index) => {
+    await Object.keys(this.state.foamLevel).forEach((key, index) => {
       if (this.state.foamLevel[key]) {
         foamLevelResult.push(key);
       }
     });
 
     this.props.handleFoamLevelSurvey(foamLevelResult);
-    console.log(foamLevelResult);
+    this.props.history.push("/survey/5");
   };
 
   setRedirect = () => {
@@ -107,15 +107,12 @@ class FoamLevelSurvey extends React.Component {
               <p>Which foam level do you prefer?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/5">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -134,4 +131,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleFoamLevelSurvey }
-)(FoamLevelSurvey);
+)(withRouter(FoamLevelSurvey));

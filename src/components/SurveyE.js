@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleMilkLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -62,18 +62,18 @@ class MilkLevelSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const milkLevelResult = [];
 
-    Object.keys(this.state.milkLevel).forEach((key, index) => {
+    await Object.keys(this.state.milkLevel).forEach((key, index) => {
       if (this.state.milkLevel[key]) {
         milkLevelResult.push(key);
       }
     });
 
     this.props.handleMilkLevelSurvey(milkLevelResult);
-    console.log(milkLevelResult);
+    this.props.history.push("/survey/6");
   };
 
   setRedirect = () => {
@@ -109,15 +109,12 @@ class MilkLevelSurvey extends React.Component {
               <p>Which milk level do you prefer?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/6">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -136,4 +133,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleMilkLevelSurvey }
-)(MilkLevelSurvey);
+)(withRouter(MilkLevelSurvey));

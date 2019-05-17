@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -62,18 +62,18 @@ class FlavorsSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const flavorsResult = [];
 
-    Object.keys(this.state.flavors).forEach((key, index) => {
+    await Object.keys(this.state.flavors).forEach((key, index) => {
       if (this.state.flavors[key]) {
         flavorsResult.push(key);
       }
     });
 
     this.props.handleFlavorsLevelSurvey(flavorsResult);
-    console.log(flavorsResult);
+    this.props.history.push("/result");
   };
 
   setRedirect = () => {
@@ -109,15 +109,12 @@ class FlavorsSurvey extends React.Component {
               <p>Which flavor do you prefer with your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/result">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  see result
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -136,4 +133,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleFlavorsLevelSurvey }
-)(FlavorsSurvey);
+)(withRouter(FlavorsSurvey));

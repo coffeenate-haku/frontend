@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { handleSugarLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -60,18 +60,18 @@ class SugarLevelSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const sugarLevelResult = [];
 
-    Object.keys(this.state.sugarLevel).forEach((key, index) => {
+    await Object.keys(this.state.sugarLevel).forEach((key, index) => {
       if (this.state.sugarLevel[key]) {
         sugarLevelResult.push(key);
       }
     });
 
-    this.props.handleSugarLevelSurvey(sugarLevelResult);
-    console.log(sugarLevelResult);
+    await this.props.handleSugarLevelSurvey(sugarLevelResult);
+    this.props.history.push("/survey/3");
   };
 
   setRedirect = () => {
@@ -107,15 +107,12 @@ class SugarLevelSurvey extends React.Component {
               <p>Which sugar level you prefer the most?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/3">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -134,4 +131,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleSugarLevelSurvey }
-)(SugarLevelSurvey);
+)(withRouter(SugarLevelSurvey));

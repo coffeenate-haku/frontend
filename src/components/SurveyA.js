@@ -1,7 +1,7 @@
 import React from "react";
 import { handleHotColdSurvey } from "../redux/actions/handleSurvey";
 import { connect } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -60,18 +60,18 @@ class HotColdSurvey extends React.Component {
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
     const hotColdResult = [];
 
-    Object.keys(this.state.hotCold).forEach((key, index) => {
+    await Object.keys(this.state.hotCold).forEach((key, index) => {
       if (this.state.hotCold[key]) {
         hotColdResult.push(key);
       }
     });
 
     this.props.handleHotColdSurvey(hotColdResult); // put props here
-    console.log(hotColdResult);
+    this.props.history.push("/survey/2");
   };
 
   setRedirect = () => {
@@ -107,15 +107,12 @@ class HotColdSurvey extends React.Component {
               <p>How do you take your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/2">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -135,4 +132,4 @@ const mapStateToProps = state => {
 export default connect(
   mapStateToProps,
   { handleHotColdSurvey }
-)(HotColdSurvey); //state, action, classname
+)(withRouter(HotColdSurvey)); //state, action, classname
