@@ -4,7 +4,6 @@ export const handleHotColdSurvey = payload => dispatch => {
     payload
   });
 };
-
 export const handleSugarLevelSurvey = payload => dispatch => {
   dispatch({
     type: "HANDLE_SUGAR_LEVEL_SURVEY",
@@ -33,9 +32,9 @@ export const handleMilkLevelSurvey = payload => dispatch => {
   });
 };
 
-export const handleFlavors = payload => dispatch => {
+export const handleFlavorsLevelSurvey = payload => dispatch => {
   dispatch({
-    type: "HANDLE_FLAVORS",
+    type: "HANDLE_FLAVORS_LEVEL_SURVEY",
     payload
   });
 };

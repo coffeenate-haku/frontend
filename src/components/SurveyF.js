@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import { handleFlavors } from "../redux/actions/handleSurvey";
+import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -72,7 +72,7 @@ class FlavorsSurvey extends React.Component {
       }
     });
 
-    this.props.handleFlavors(flavorsResult);
+    this.props.handleFlavorsLevelSurvey(flavorsResult);
     console.log(flavorsResult);
   };
 
@@ -135,5 +135,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { handleFlavors }
+  { handleFlavorsLevelSurvey }
 )(FlavorsSurvey);
