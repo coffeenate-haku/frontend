@@ -106,7 +106,7 @@ class BodyLevelSurvey extends React.Component {
           <div style={style.mobile}>
             <div style={style.container}>
               <p>3 of 6</p>
-              <p>How light or bold do you like your cofee?</p>
+              <p>How light or bold do you like your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
                 <input

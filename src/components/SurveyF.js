@@ -106,7 +106,7 @@ class FlavorsSurvey extends React.Component {
           <div style={style.mobile}>
             <div style={style.container}>
               <p>6 of 6</p>
-              <p>Which flavor do you prefer with your coffee?</p>
+              <p>Which flavors do you prefer with your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
                 <input

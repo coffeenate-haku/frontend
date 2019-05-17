@@ -125,7 +125,7 @@ class Navigation extends React.Component {
         </Navbar.Collapse>
         <Modal size="lg" show={this.state.lgshow} onHide={this.handleClose}>
           <Modal.Header closeButton>
-            <Modal.Title>Modal heading</Modal.Title>
+            <Modal.Title />
           </Modal.Header>
           <Modal.Body>
             <Tabs
@@ -162,11 +162,7 @@ class Navigation extends React.Component {
               </Tab>
             </Tabs>
           </Modal.Body>
-          <Modal.Footer>
-            <NavLink to="/" onClick={this.handleClose}>
-              close
-            </NavLink>
-          </Modal.Footer>
+          <Modal.Footer />
         </Modal>
       </Navbar>
     );
