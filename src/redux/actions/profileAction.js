@@ -2,9 +2,14 @@ import axios from "axios";
 
 export const login = data => dispatch => {
   axios
-    .post(`${process.env.REACT_APP_API_URL}/users/login`, data) //api login
+    .post(`${process.env.REACT_APP_API_URL}/users/login`, data, {
+      headers: {
+        "Access-Control-Allow-Origin": "http://localhost:3001",
+        "Access-Control-Allow-Methods": "POST",
+        "Access-Control-Allow-Headers": "Content-Type, Authorization"
+      }
+    }) //api login
     .then(({ data: { token, user: { email, name, id } } }) => {
-      console.log(id);
       const payload = {
         id,
         token,
@@ -15,7 +20,7 @@ export const login = data => dispatch => {
         type: "login",
         payload
       });
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", token)
     })
     .catch(error => console.log(error));
 };

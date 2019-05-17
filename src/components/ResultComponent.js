@@ -1,9 +1,8 @@
-import React from "react"
-import { Card, Button } from "react-bootstrap"
-
-import { NavLink } from "react-router-dom"
-import axios from "axios"
-import { connect } from "react-redux"
+import React from "react";
+import { Card, Button } from "react-bootstrap";
+import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { getRecommendation } from "../redux/actions/getRecommendation";
 
 const style = {
   container: {
@@ -29,32 +28,16 @@ const style = {
 }
 
 class ResultComponent extends React.Component {
-  state = {
-    coffeeRecommendations: []
-  }
+  // state = {
+  //   coffeeRecommendations: []
+  // };
 
   componentDidMount() {
-    axios
-      .get(
-        `${process.env.REACT_APP_API_URL}/users/recommendations/${
-          this.props.id
-        }`,
-        {
-          headers: {
-            Authorization: `bearer ${localStorage.getItem("token")}`
-          }
-        }
-      )
-      .then(results => {
-        console.log(results)
-        this.setState({
-          coffeeRecommendations: results.data
-        })
-      })
+   this.props.getRecommendation(this.props.id)
   }
 
   render() {
-    const recommendations = this.state.coffeeRecommendations.map(
+    const recommendations = this.props.recommendation.map(
       (item, index) => {
         return (
           <div style={style.container} key={index}>
@@ -66,9 +49,9 @@ class ResultComponent extends React.Component {
               </Card.Body>
             </Card>
           </div>
-        )
+        );
       }
-    )
+    );
     return (
       <div>
         {recommendations}
@@ -82,11 +65,15 @@ class ResultComponent extends React.Component {
   }
 }
 
-const mapStatetoProps = store => ({
-  id: store.profile.id
-})
+const mapStatetoProps = state => {
+  console.log(state);
+  return {
+    id: state.profile.id,
+    recommendation: state.recommendation.recommendation
+  };
+};
 
 export default connect(
   mapStatetoProps,
-  null
-)(ResultComponent)
+  { getRecommendation }
+)(ResultComponent);

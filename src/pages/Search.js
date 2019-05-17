@@ -83,11 +83,20 @@ class Search extends React.Component {
   };
 
   componentDidMount() {
-    getBestRestaurants().then(response => {
-      this.setState({
-        restaurants: response
+    const query = this.props.recommendation.map(data => data.name);
+
+    const joinQuery = query.join(" ");
+
+    getBestRestaurants(joinQuery)
+      .then(response => {
+        console.log(response);
+        this.setState({
+          restaurants: response
+        })
+      })
+      .catch(error => {
+        console.log(error);
       });
-    });
 
     getRestaurantbyDistance().then(response => {
       this.setState({
@@ -103,15 +112,16 @@ class Search extends React.Component {
           <ResultNav />
           <H44>Recommendation</H44>
           <Div>
-            {best.map((best, index) => {
+            {this.state.restaurants.map((data, index) => {
               return (
                 <Card key={index}>
                   <Link to="/details">
                     <Images>
-                      <Img src={best.image} alt="" />
+                      <Img src={data.restaurant.thumb} alt="" />
                     </Images>
                   </Link>
-                  <H5>{best.title}</H5>
+                  <H5>{data.restaurant.name}</H5>
+                  <p>Rating : {data.restaurant.user_rating.aggregate_rating}</p>
                 </Card>
               );
             })}
@@ -166,7 +176,12 @@ class Search extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({});
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    recommendation: state.recommendation.recommendation
+  };
+};
 
 export default connect(
   mapStateToProps,

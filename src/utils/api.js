@@ -9,9 +9,9 @@ const API_CONFIG = {
   }
 }
 
-export const getBestRestaurants = () => {
+export const getBestRestaurants = (payload) => {
   return axios
-    .get(API_STRING, API_CONFIG)
+    .get(`${API_STRING}&q=${payload}`, API_CONFIG)
     .then(response => {
       return response.data.restaurants
     })
