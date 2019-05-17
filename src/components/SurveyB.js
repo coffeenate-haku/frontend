@@ -43,7 +43,7 @@ const style = {
 
 export default class SurveyCoffee extends React.Component {
   state = {
-    sweetnessTypes: {
+    sugarLevel: {
       noSugar: false,
       lessSugar: false,
       sweet: false
@@ -51,7 +51,7 @@ export default class SurveyCoffee extends React.Component {
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.sweetnessTypes;
+    let coffees = this.state.sugarLevel;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
@@ -62,8 +62,8 @@ export default class SurveyCoffee extends React.Component {
     e.preventDefault();
     const coffeeArray = [];
 
-    Object.keys(this.state.sweetnessTypes).forEach((key, index) => {
-      if (this.state.sweetnessTypes[key]) {
+    Object.keys(this.state.sugarLevel).forEach((key, index) => {
+      if (this.state.sugarLevel[key]) {
         coffeeArray.push(key);
       }
     });
@@ -78,14 +78,14 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.sweetnessTypes).map((key, index) => {
+    return Object.keys(this.state.sugarLevel).map((key, index) => {
       return (
         <div>
           <input
             key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.sweetnessTypes[key]}
+            checked={this.state.sugarLevel[key]}
             value={key}
           />
           {key}
@@ -101,7 +101,7 @@ export default class SurveyCoffee extends React.Component {
           <div style={style.mobile}>
             <div style={style.container}>
               <p>2 of 6</p>
-              <p>Which sweetness level you prefer the most?</p>
+              <p>Which sugar level you prefer the most?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
                 <NavLink to="/survey/3">

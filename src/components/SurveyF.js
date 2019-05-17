@@ -43,16 +43,17 @@ const style = {
 
 export default class SurveyCoffee extends React.Component {
   state = {
-    flavorTypes: {
-      Earthly: false,
-      Chocolate: false,
-      BrownSugar: false,
-      ToastedNut: false
+    flavors: {
+      earthy: false,
+      chocolate: false,
+      brownSugar: false,
+      toastedNut: false,
+      vanilla: false
     }
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.flavorTypes;
+    let coffees = this.state.flavors;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
@@ -63,8 +64,8 @@ export default class SurveyCoffee extends React.Component {
     e.preventDefault();
     const coffeeArray = [];
 
-    Object.keys(this.state.flavorTypes).forEach((key, index) => {
-      if (this.state.flavorTypes[key]) {
+    Object.keys(this.state.flavors).forEach((key, index) => {
+      if (this.state.flavors[key]) {
         coffeeArray.push(key);
       }
     });
@@ -79,14 +80,14 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.flavorTypes).map((key, index) => {
+    return Object.keys(this.state.flavors).map((key, index) => {
       return (
         <div>
           <input
             key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.flavorTypes[key]}
+            checked={this.state.flavors[key]}
             value={key}
           />
           {key}
