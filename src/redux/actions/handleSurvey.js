@@ -38,3 +38,10 @@ export const handleFlavorsLevelSurvey = payload => dispatch => {
     payload
   });
 };
+
+export const handleFlavorsSurvey = payload => dispatch => {
+  dispatch({
+    type: "HANDLE_FLAVORS_SURVEY",
+    payload
+  })
+}
