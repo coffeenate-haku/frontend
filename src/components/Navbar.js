@@ -142,7 +142,7 @@ class Navigation extends React.Component {
                       <Image src={modal} alt="modal" style={style.img} />
                     </Col>
                     <Col xs={12} md={4} style={style.col}>
-                      <Login />
+                      <Login handleClose={this.handleClose}/>
                     </Col>
                   </Row>
                 </Container>
