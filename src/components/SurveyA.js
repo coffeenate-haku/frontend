@@ -1,5 +1,6 @@
 import React from "react";
-// import {Redirect} from 'react-router-dom'
+import { connect } from "react-redux";
+import { handleHotColdSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -42,7 +43,7 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class HotColdSurvey extends React.Component {
   state = {
     hotCold: {
       hot: false,
@@ -60,15 +61,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const hotColdResult = [];
 
     Object.keys(this.state.hotCold).forEach((key, index) => {
       if (this.state.hotCold[key]) {
-        coffeeArray.push(key);
+        hotColdResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleHotColdSurvey(hotColdResult);
+    console.log(hotColdResult);
   };
 
   setRedirect = () => {
@@ -118,3 +120,15 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    hotCold: state.survey.hotCold
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleHotColdSurvey }
+)(HotColdSurvey);
