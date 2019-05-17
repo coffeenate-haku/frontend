@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleFlavors } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -41,7 +43,7 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class FlavorsSurvey extends React.Component {
   state = {
     flavors: {
       earthy: false,
@@ -62,15 +64,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const flavorsResult = [];
 
     Object.keys(this.state.flavors).forEach((key, index) => {
       if (this.state.flavors[key]) {
-        coffeeArray.push(key);
+        flavorsResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleFlavors(flavorsResult);
+    console.log(flavorsResult);
   };
 
   setRedirect = () => {
@@ -98,7 +101,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -123,3 +126,14 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    flavors: state.survey.flavors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleFlavors }
+)(FlavorsSurvey);

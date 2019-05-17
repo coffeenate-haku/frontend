@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleSugarLevelSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -41,7 +43,7 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class SugarLevelSurvey extends React.Component {
   state = {
     sugarLevel: {
       noSugar: false,
@@ -60,15 +62,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const sugarLevelResult = [];
 
     Object.keys(this.state.sugarLevel).forEach((key, index) => {
       if (this.state.sugarLevel[key]) {
-        coffeeArray.push(key);
+        sugarLevelResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleSugarLevelSurvey(sugarLevelResult);
+    console.log(sugarLevelResult);
   };
 
   setRedirect = () => {
@@ -96,7 +99,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -121,3 +124,14 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    sugarLevel: state.survey.sugarLevel
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleSugarLevelSurvey }
+)(SugarLevelSurvey);

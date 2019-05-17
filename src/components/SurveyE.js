@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleMilkLevelSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -40,10 +42,9 @@ const style = {
     margin: "15px"
   }
 };
-
-export default class SurveyCoffee extends React.Component {
+class MilkLevelSurvey extends React.Component {
   state = {
-    milkTypes: {
+    milkLevel: {
       0: false,
       1: false,
       2: false,
@@ -54,7 +55,7 @@ export default class SurveyCoffee extends React.Component {
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.milkTypes;
+    let coffees = this.state.milkLevel;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
@@ -63,15 +64,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const milkLevelResult = [];
 
-    Object.keys(this.state.milkTypes).forEach((key, index) => {
-      if (this.state.milkTypes[key]) {
-        coffeeArray.push(key);
+    Object.keys(this.state.milkLevel).forEach((key, index) => {
+      if (this.state.milkLevel[key]) {
+        milkLevelResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleMilkLevelSurvey(milkLevelResult);
+    console.log(milkLevelResult);
   };
 
   setRedirect = () => {
@@ -81,14 +83,14 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.milkTypes).map((key, index) => {
+    return Object.keys(this.state.milkLevel).map((key, index) => {
       return (
         <div>
           <input
             key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.milkTypes[key]}
+            checked={this.state.milkLevel[key]}
             value={key}
           />
           {key}
@@ -99,7 +101,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -124,3 +126,14 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    milkLevel: state.survey.milkLevel
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleMilkLevelSurvey }
+)(MilkLevelSurvey);

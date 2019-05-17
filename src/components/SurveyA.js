@@ -1,5 +1,7 @@
 import React from "react";
-// import {Redirect} from 'react-router-dom'
+import { handleHotColdSurvey } from "../redux/actions/handleSurvey";
+import { connect } from "react-redux";
+import { NavLink } from "react-router-dom";
 
 const style = {
   main: {
@@ -42,7 +44,7 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class HotColdSurvey extends React.Component {
   state = {
     hotCold: {
       hot: false,
@@ -60,15 +62,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const hotColdResult = [];
 
     Object.keys(this.state.hotCold).forEach((key, index) => {
       if (this.state.hotCold[key]) {
-        coffeeArray.push(key);
+        hotColdResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleHotColdSurvey(hotColdResult); // put props here
+    console.log(hotColdResult);
   };
 
   setRedirect = () => {
@@ -96,7 +99,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -104,12 +107,15 @@ export default class SurveyCoffee extends React.Component {
               <p>How do you take your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
+                <NavLink to="/survey/2">
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                  skip
+                </NavLink>
               </form>
             </div>
           </div>
@@ -118,3 +124,15 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  // console.log(state);
+  return {
+    hotCold: state.survey.hotCold
+  }; //global state diubah menjadi props supaya bisa dipake di component
+};
+
+export default connect(
+  mapStateToProps,
+  { handleHotColdSurvey }
+)(HotColdSurvey); //state, action, classname

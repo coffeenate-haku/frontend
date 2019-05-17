@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleBodyLevelSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -41,7 +43,7 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class BodyLevelSurvey extends React.Component {
   state = {
     bodyLevel: {
       1: false,
@@ -62,15 +64,16 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const bodyLevelResult = [];
 
     Object.keys(this.state.bodyLevel).forEach((key, index) => {
       if (this.state.bodyLevel[key]) {
-        coffeeArray.push(key);
+        bodyLevelResult.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleBodyLevelSurvey(bodyLevelResult);
+    console.log(bodyLevelResult);
   };
 
   setRedirect = () => {
@@ -98,7 +101,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -123,3 +126,14 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    bodyLevel: state.survey.bodyLevel
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleBodyLevelSurvey }
+)(BodyLevelSurvey);
