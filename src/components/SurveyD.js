@@ -13,16 +13,17 @@ const style = {
   },
 
   mobile: {
-    backgroundColor: "#F5F5F5",
+    backgroundColor: "#FFFFFF",
     width: "375px",
-    height: "500px",
+    minHeight: "500px",
     margin: "auto"
   },
 
   container: {
-    paddingTop: "100px",
+    padding: "50px 0px",
     textAlign: "center",
-    topMargin: "20px"
+    topMargin: "20px",
+    fontSize: "24px"
   },
 
   p: {
@@ -56,16 +57,16 @@ const style = {
   },
 
   continuebutton: {
-    width: "100px",
-    margin: "15px"
+    width: "200px",
+    margin: "10px"
   }
 };
 
 const StyledOption = styled.div`
   padding: 10px 20px;
-  background: brown;
+  background: #f4f0e5;
   margin: 10px;
-  color: #fff;
+  color: #4c3a32;
   width: 200px;
   border-radius: 5px;
   display: flex;
@@ -73,8 +74,9 @@ const StyledOption = styled.div`
   justify-content: space-between;
 
   :hover {
-    background: blue;
+    background: rgb(122, 79, 59);
     cursor: pointer;
+    color: #f4f0e5;
   }
 `;
 
