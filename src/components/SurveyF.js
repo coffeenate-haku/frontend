@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+const axios = require("axios");
 
 const style = {
   main: {
@@ -64,6 +65,23 @@ class FlavorsSurvey extends React.Component {
 
   onSubmit = async e => {
     e.preventDefault();
+
+    axios
+      .put(
+        `${process.env.REACT_APP_API_COFFEE_RECOMMENDATION}/${
+          this.props.userId
+        }`,
+        `${this.props.surveyResults}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.props.userToken}`
+          }
+        }
+      )
+      .then(response => {
+        console.log(response);
+      });
+
     const flavorsResult = [];
 
     await Object.keys(this.state.flavors).forEach((key, index) => {
@@ -128,7 +146,10 @@ const mapStateToProps = state => {
   console.log(state);
 
   return {
-    flavors: state.survey.flavors
+    flavors: state.survey.flavors,
+    surveyResults: state.survey,
+    userId: state.profile.id,
+    userToken: state.profile.token
   };
 };
 
