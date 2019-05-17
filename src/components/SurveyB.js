@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleSugarLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   main: {
@@ -20,6 +23,21 @@ const style = {
     paddingTop: "100px",
     textAlign: "center",
     topMargin: "20px"
+  },
+
+  p: {
+    fontSize: "16px"
+  },
+
+  form: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
+  },
+
+  text: {
+    textAlign: "left",
+    margin: "0 auto"
   },
 
   toolbar: {
@@ -42,6 +60,23 @@ const style = {
     margin: "15px"
   }
 };
+
+const StyledOption = styled.div`
+  padding: 10px 20px;
+  background: brown;
+  margin: 10px;
+  color: #fff;
+  width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :hover {
+    background: blue;
+    cursor: pointer;
+  }
+`;
 
 class SugarLevelSurvey extends React.Component {
   state = {
@@ -81,18 +116,24 @@ class SugarLevelSurvey extends React.Component {
     });
   };
 
+  handleOptionPressed = key => {
+    this.setState({
+      sugarLevel: {
+        ...this.state.sugarLevel,
+        [key]: !this.state.sugarLevel[key]
+      }
+    });
+  };
+
   renderCoffeeTypes() {
     return Object.keys(this.state.sugarLevel).map((key, index) => {
       return (
-        <div key={index}>
-          <input
-            onChange={this.handleCheckChieldElement}
-            type="checkbox"
-            checked={this.state.sugarLevel[key]}
-            value={key}
-          />
-          {key}
-        </div>
+        <StyledOption key={index} onClick={() => this.handleOptionPressed(key)}>
+          <span>{key}</span>
+          {this.state.sugarLevel[key] && (
+            <FontAwesomeIcon icon={faCheckCircle} />
+          )}
+        </StyledOption>
       );
     });
   }
@@ -103,17 +144,19 @@ class SugarLevelSurvey extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>2 of 6</p>
+              <p style={style.p}>2 of 6</p>
               <p>Which sugar level you prefer the most?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
-              </form>
+              <div style={style.form}>
+                <form style={style.text} onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleMilkLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   main: {
@@ -20,6 +23,21 @@ const style = {
     paddingTop: "100px",
     textAlign: "center",
     topMargin: "20px"
+  },
+
+  p: {
+    fontSize: "16px"
+  },
+
+  form: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
+  },
+
+  text: {
+    textAlign: "left",
+    margin: "0 auto"
   },
 
   toolbar: {
@@ -42,6 +60,24 @@ const style = {
     margin: "15px"
   }
 };
+
+const StyledOption = styled.div`
+  padding: 10px 20px;
+  background: brown;
+  margin: 10px;
+  color: #fff;
+  width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :hover {
+    background: blue;
+    cursor: pointer;
+  }
+`;
+
 class MilkLevelSurvey extends React.Component {
   state = {
     milkLevel: {
@@ -83,18 +119,24 @@ class MilkLevelSurvey extends React.Component {
     });
   };
 
+  handleOptionPressed = key => {
+    this.setState({
+      milkLevel: {
+        ...this.state.milkLevel,
+        [key]: !this.state.milkLevel[key]
+      }
+    });
+  };
+
   renderCoffeeTypes() {
     return Object.keys(this.state.milkLevel).map((key, index) => {
       return (
-        <div key={index}>
-          <input
-            onChange={this.handleCheckChieldElement}
-            type="checkbox"
-            checked={this.state.milkLevel[key]}
-            value={key}
-          />
-          {key}
-        </div>
+        <StyledOption key={index} onClick={() => this.handleOptionPressed(key)}>
+          <span>{key}</span>
+          {this.state.milkLevel[key] && (
+            <FontAwesomeIcon icon={faCheckCircle} />
+          )}
+        </StyledOption>
       );
     });
   }
@@ -105,17 +147,19 @@ class MilkLevelSurvey extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>5 of 6</p>
+              <p style={style.p}>5 of 6</p>
               <p>Which milk level do you prefer?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
-              </form>
+              <div style={style.form}>
+                <form style={style.text} onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleBodyLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const style = {
   main: {
@@ -20,6 +23,20 @@ const style = {
     paddingTop: "100px",
     textAlign: "center",
     topMargin: "20px"
+  },
+  p: {
+    fontSize: "16px"
+  },
+
+  form: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
+  },
+
+  text: {
+    textAlign: "left",
+    margin: "0 auto"
   },
 
   toolbar: {
@@ -42,6 +59,23 @@ const style = {
     margin: "15px"
   }
 };
+
+const StyledOption = styled.div`
+  padding: 10px 20px;
+  background: brown;
+  margin: 10px;
+  color: #fff;
+  width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :hover {
+    background: blue;
+    cursor: pointer;
+  }
+`;
 
 class BodyLevelSurvey extends React.Component {
   state = {
@@ -83,18 +117,24 @@ class BodyLevelSurvey extends React.Component {
     });
   };
 
+  handleOptionPressed = key => {
+    this.setState({
+      bodyLevel: {
+        ...this.state.bodyLevel,
+        [key]: !this.state.bodyLevel[key]
+      }
+    });
+  };
+
   renderCoffeeTypes() {
     return Object.keys(this.state.bodyLevel).map((key, index) => {
       return (
-        <div key={index}>
-          <input
-            onChange={this.handleCheckChieldElement}
-            type="checkbox"
-            checked={this.state.bodyLevel[key]}
-            value={key}
-          />
-          {key}
-        </div>
+        <StyledOption key={index} onClick={() => this.handleOptionPressed(key)}>
+          <span>{key}</span>
+          {this.state.bodyLevel[key] && (
+            <FontAwesomeIcon icon={faCheckCircle} />
+          )}
+        </StyledOption>
       );
     });
   }
@@ -105,17 +145,19 @@ class BodyLevelSurvey extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>3 of 6</p>
+              <p style={style.p}>3 of 6</p>
               <p>How light or bold do you like your coffee?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
-              </form>
+              <div style={style.form}>
+                <form style={style.text} onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>

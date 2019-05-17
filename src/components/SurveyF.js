@@ -2,6 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
 import { withRouter } from "react-router-dom";
+import styled from "@emotion/styled";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 
 const axios = require("axios");
 
@@ -24,6 +27,21 @@ const style = {
     topMargin: "20px"
   },
 
+  p: {
+    fontSize: "16px"
+  },
+
+  form: {
+    justifyContent: "center",
+    display: "flex",
+    flexDirection: "column"
+  },
+
+  text: {
+    textAlign: "left",
+    margin: "0 auto"
+  },
+
   toolbar: {
     display: "flex",
     justifyContent: "center",
@@ -44,6 +62,23 @@ const style = {
     margin: "15px"
   }
 };
+
+const StyledOption = styled.div`
+  padding: 10px 20px;
+  background: brown;
+  margin: 10px;
+  color: #fff;
+  width: 200px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  :hover {
+    background: blue;
+    cursor: pointer;
+  }
+`;
 
 class FlavorsSurvey extends React.Component {
   state = {
@@ -102,18 +137,22 @@ class FlavorsSurvey extends React.Component {
     });
   };
 
+  handleOptionPressed = key => {
+    this.setState({
+      flavors: {
+        ...this.state.flavors,
+        [key]: !this.state.flavors[key]
+      }
+    });
+  };
+
   renderCoffeeTypes() {
     return Object.keys(this.state.flavors).map((key, index) => {
       return (
-        <div key={index}>
-          <input
-            onChange={this.handleCheckChieldElement}
-            type="checkbox"
-            checked={this.state.flavors[key]}
-            value={key}
-          />
-          {key}
-        </div>
+        <StyledOption key={index} onClick={() => this.handleOptionPressed(key)}>
+          <span>{key}</span>
+          {this.state.flavors[key] && <FontAwesomeIcon icon={faCheckCircle} />}
+        </StyledOption>
       );
     });
   }
@@ -124,17 +163,19 @@ class FlavorsSurvey extends React.Component {
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
-              <p>6 of 6</p>
+              <p style={style.p}>6 of 6</p>
               <p>Which flavors do you prefer with your coffee?</p>
-              <form onSubmit={this.onSubmit}>
-                {this.renderCoffeeTypes()}
-                <input
-                  style={style.continuebutton}
-                  type="submit"
-                  value="Continue"
-                  onClick={this.onSubmit}
-                />
-              </form>
+              <div style={style.form}>
+                <form style={style.text} onSubmit={this.onSubmit}>
+                  {this.renderCoffeeTypes()}
+                  <input
+                    style={style.continuebutton}
+                    type="submit"
+                    value="Continue"
+                    onClick={this.onSubmit}
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </div>
