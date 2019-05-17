@@ -39,7 +39,11 @@ class FormRegister extends React.Component {
 
     axios
       .post(API_URL, user)
+<<<<<<< Updated upstream
       .then(response => alert(`Anda berhasil log in: ${response.data}`))
+=======
+      .then(response => alert(`Welcome ${response.data.name}`))
+>>>>>>> Stashed changes
       .catch(error => console.log(error));
   };
 

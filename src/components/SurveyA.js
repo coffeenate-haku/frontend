@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+// import {Redirect} from 'react-router-dom'
 
 const style = {
   main: {
@@ -104,15 +104,12 @@ export default class SurveyCoffee extends React.Component {
               <p>How do you take your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/2">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
