@@ -1,5 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+
+import { handleSugarLevelSurvey } from "../redux/actions/handleSurvey";
 
 const style = {
   main: {
@@ -41,7 +44,11 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class SurveyCoffee extends React.Component {
+  componentDidMount() {
+    console.log(this.props);
+  }
+
   state = {
     sweetnessTypes: {
       noSugar: false,
@@ -60,15 +67,17 @@ export default class SurveyCoffee extends React.Component {
 
   onSubmit = e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const sugarLevelResults = [];
 
     Object.keys(this.state.sweetnessTypes).forEach((key, index) => {
       if (this.state.sweetnessTypes[key]) {
-        coffeeArray.push(key);
+        sugarLevelResults.push(key);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleSugarLevelSurvey(sugarLevelResults)
+
+    console.log(sugarLevelResults);
   };
 
   setRedirect = () => {
@@ -80,9 +89,8 @@ export default class SurveyCoffee extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.sweetnessTypes).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.sweetnessTypes[key]}
@@ -121,3 +129,15 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    sugarLevel: state.survey.sugarLevel
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleSugarLevelSurvey }
+)(SurveyCoffee);
