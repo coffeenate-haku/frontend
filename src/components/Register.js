@@ -1,52 +1,52 @@
-import React from "react"
-import axios from "axios"
-import styled from "@emotion/styled"
+import React from "react";
+import axios from "axios";
+import styled from "@emotion/styled";
 
 const Input = styled.input`
   margin-bottom: 10px;
   padding: 5px 10px;
-`
+`;
 const Button = styled.button`
   background-color: #4c3a32;
   color: #f5f1e8;
   border-style: none;
   padding: 5px 10px;
-`
+`;
 class FormRegister extends React.Component {
   state = {
     name: "",
     username: "",
     email: "",
     password: ""
-  }
+  };
 
   handleChange = event => {
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
+    });
+  };
 
   handleSubmit = event => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const API_URL = `https://coffeenate-backend-mongoose.herokuapp.com/users/register`
+    const API_URL = `${process.env.REACT_APP_API_URL}/users/register`;
     const user = {
       name: this.state.name,
       username: this.state.username,
       email: this.state.email,
       password: this.state.password
-    }
+    };
 
     axios
       .post(API_URL, user)
-      .then(response => alert(`Anda berhasil log in: ${response.data}`))
-      .catch(error => console.log(error))
-  }
+      .then(response => alert(`Welcome ${response.data.name}`))
+      .catch(error => console.log(error));
+  };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <h1>Signup</h1>
+        <h1>Create Accounts</h1>
         <fieldset>
           <Input
             placeholder="Name"
@@ -81,8 +81,8 @@ class FormRegister extends React.Component {
           <Button type="submit">Register</Button>
         </fieldset>
       </form>
-    )
+    );
   }
 }
 
-export default FormRegister
+export default FormRegister;

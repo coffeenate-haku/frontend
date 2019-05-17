@@ -25,7 +25,13 @@ const style = {
     justifyContent: "center"
   }
 };
+
 class ResultComponent extends React.Component {
+  state = {
+    name: "",
+    description: ""
+  };
+
   render() {
     return (
       <div>

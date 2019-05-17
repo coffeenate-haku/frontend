@@ -7,6 +7,7 @@ import MapImage from "../assets/thumbnail/map-direction.jpg";
 import Footer from "./Footer";
 import { getBestRestaurants } from "../utils/api";
 import { getRestaurantbyDistance } from "../utils/api";
+import { connect } from "react-redux";
 
 const Main = styled.div`
   background-color: #f5f1e8;
@@ -36,7 +37,7 @@ const style = {
   }
 };
 
-export default class DetailsComponent extends React.Component {
+class DetailsComponent extends React.Component {
   componentDidMount() {
     getBestRestaurants().then(response => {
       this.setState({
@@ -105,3 +106,10 @@ export default class DetailsComponent extends React.Component {
     );
   }
 }
+
+const mapStatetoProps = store => ({});
+
+export default connect(
+  mapStatetoProps,
+  null
+)(DetailsComponent);

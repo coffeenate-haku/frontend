@@ -7,6 +7,7 @@ import Rating from "../assets/thumbnail/five-star.png";
 import styled from "@emotion/styled";
 import { getBestRestaurants } from "../utils/api";
 import { getRestaurantbyDistance } from "../utils/api";
+import { connect } from "react-redux";
 
 const Container = styled.div`
   background-color: #f5f1e8;
@@ -123,7 +124,7 @@ class Search extends React.Component {
             {this.state.restaurants.map((item, index) => {
               return (
                 <Card key={index}>
-                  <Link to="/details" onClick="">
+                  <Link to="/details" onClick={item.restaurant}>
                     <Images>
                       <Img src={item.restaurant.thumb} alt="" />
                     </Images>
@@ -165,4 +166,9 @@ class Search extends React.Component {
   }
 }
 
-export default Search;
+const mapStateToProps = store => ({});
+
+export default connect(
+  mapStateToProps,
+  null
+)(Search);

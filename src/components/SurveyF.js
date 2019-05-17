@@ -1,5 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
+import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -41,35 +43,38 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class FlavorsSurvey extends React.Component {
   state = {
-    flavorTypes: {
-      Earthly: false,
-      Chocolate: false,
-      BrownSugar: false,
-      ToastedNut: false
+    flavors: {
+      earthy: false,
+      chocolate: false,
+      brownSugar: false,
+      toastedNut: false,
+      vanilla: false
     }
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.flavorTypes;
+    let coffees = this.state.flavors;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const flavorsResult = [];
 
-    Object.keys(this.state.flavorTypes).forEach((key, index) => {
-      if (this.state.flavorTypes[key]) {
-        coffeeArray.push(key);
+    await Object.keys(this.state.flavors).forEach((key, index) => {
+      if (this.state.flavors[key]) {
+        flavorsResult.push(key);
+        console.log(flavorsResult);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleFlavorsLevelSurvey(flavorsResult);
+    this.props.history.push("/result");
   };
 
   setRedirect = () => {
@@ -79,14 +84,13 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.flavorTypes).map((key, index) => {
+    return Object.keys(this.state.flavors).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.flavorTypes[key]}
+            checked={this.state.flavors[key]}
             value={key}
           />
           {key}
@@ -97,7 +101,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -105,15 +109,12 @@ export default class SurveyCoffee extends React.Component {
               <p>Which flavor do you prefer with your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/result">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  see result
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -122,3 +123,16 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  console.log(state);
+
+  return {
+    flavors: state.survey.flavors
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { handleFlavorsLevelSurvey }
+)(withRouter(FlavorsSurvey));

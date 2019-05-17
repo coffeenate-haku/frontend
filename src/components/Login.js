@@ -47,13 +47,6 @@ const Login = props => {
           };
 
           props.login(userLogin);
-
-          // axios
-          //   .post(API_URL, userLogin)
-          //   .then(response => console.log(response))
-          //   .catch(error => console.log(error));
-
-          // setSubmitting(false);
         }}
       >
         {({ isSubmitting }) => (
@@ -61,7 +54,7 @@ const Login = props => {
             <div>
               <Field
                 style={style.field}
-                placeholder="Username"
+                placeholder="Email"
                 type="email"
                 name="email"
               />

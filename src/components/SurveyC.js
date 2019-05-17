@@ -1,7 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
-import {connect} from "react-redux";
-import {handleBodyLevelSurvey} from '../redux/actions/handleSurvey'
+import { connect } from "react-redux";
+import { handleBodyLevelSurvey } from "../redux/actions/handleSurvey";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -43,9 +43,9 @@ const style = {
   }
 };
 
-class SurveyCoffee extends React.Component {
+class BodyLevelSurvey extends React.Component {
   state = {
-    bodyTypes: {
+    bodyLevel: {
       1: false,
       2: false,
       3: false,
@@ -55,26 +55,26 @@ class SurveyCoffee extends React.Component {
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.bodyTypes;
+    let coffees = this.state.bodyLevel;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const bodyLevelResult = [];
 
-    Object.keys(this.state.bodyTypes).forEach((key, index) => {
-      if (this.state.bodyTypes[key]) {
-        coffeeArray.push(key);
+    await Object.keys(this.state.bodyLevel).forEach((key, index) => {
+      if (this.state.bodyLevel[key]) {
+        bodyLevelResult.push(key);
+        console.log(bodyLevelResult);
       }
     });
 
-    this.props.handleBodyLevelSurvey(coffeeArray)
-
-    console.log(coffeeArray);
+    this.props.handleBodyLevelSurvey(bodyLevelResult);
+    this.props.history.push("/survey/4");
   };
 
   setRedirect = () => {
@@ -84,14 +84,13 @@ class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.bodyTypes).map((key, index) => {
+    return Object.keys(this.state.bodyLevel).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.bodyTypes[key]}
+            checked={this.state.bodyLevel[key]}
             value={key}
           />
           {key}
@@ -102,7 +101,7 @@ class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -110,15 +109,12 @@ class SurveyCoffee extends React.Component {
               <p>How light or bold do you like your cofee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/4">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -129,10 +125,12 @@ class SurveyCoffee extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state)
-  return{
-    bodyLevel: state.survey.bodyLevel 
-  }
-}
+  return {
+    bodyLevel: state.survey.bodyLevel
+  };
+};
 
-export default connect(mapStateToProps, {handleBodyLevelSurvey})(SurveyCoffee)
+export default connect(
+  mapStateToProps,
+  { handleBodyLevelSurvey }
+)(withRouter(BodyLevelSurvey));

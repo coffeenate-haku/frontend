@@ -1,5 +1,7 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { handleHotColdSurvey } from "../redux/actions/handleSurvey";
+import { connect } from "react-redux";
+import { withRouter } from "react-router-dom";
 
 const style = {
   main: {
@@ -42,35 +44,35 @@ const style = {
   }
 };
 
-export default class SurveyCoffee extends React.Component {
+class HotColdSurvey extends React.Component {
   state = {
-    coffeeTypes: {
-      Black: false,
-      Cream: false,
-      Sugar: false,
-      Decaf: false
+    hotCold: {
+      hot: false,
+      cold: false
     }
   };
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.coffeeTypes;
+    let coffees = this.state.hotCold;
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
     this.setState({ coffees }, console.log(this.state));
   };
 
-  onSubmit = e => {
+  onSubmit = async e => {
     e.preventDefault();
-    const coffeeArray = [];
+    const hotColdResult = [];
 
-    Object.keys(this.state.coffeeTypes).forEach((key, index) => {
-      if (this.state.coffeeTypes[key]) {
-        coffeeArray.push(key);
+    await Object.keys(this.state.hotCold).forEach((key, index) => {
+      if (this.state.hotCold[key]) {
+        hotColdResult.push(key);
+        console.log(hotColdResult);
       }
     });
 
-    console.log(coffeeArray);
+    this.props.handleHotColdSurvey(hotColdResult); // put props here
+    this.props.history.push("/survey/2");
   };
 
   setRedirect = () => {
@@ -80,14 +82,13 @@ export default class SurveyCoffee extends React.Component {
   };
 
   renderCoffeeTypes() {
-    return Object.keys(this.state.coffeeTypes).map((key, index) => {
+    return Object.keys(this.state.hotCold).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
-            checked={this.state.coffeeTypes[key]}
+            checked={this.state.hotCold[key]}
             value={key}
           />
           {key}
@@ -98,7 +99,7 @@ export default class SurveyCoffee extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
+      <React.Fragment key="">
         <div style={style.main}>
           <div style={style.mobile}>
             <div style={style.container}>
@@ -106,15 +107,12 @@ export default class SurveyCoffee extends React.Component {
               <p>How do you take your coffee?</p>
               <form onSubmit={this.onSubmit}>
                 {this.renderCoffeeTypes()}
-                <NavLink to="/survey/2">
-                  <input
-                    style={style.continuebutton}
-                    type="submit"
-                    value="Continue"
-                    onClick={this.onSubmit}
-                  />
-                  skip
-                </NavLink>
+                <input
+                  style={style.continuebutton}
+                  type="submit"
+                  value="Continue"
+                  onClick={this.onSubmit}
+                />
               </form>
             </div>
           </div>
@@ -123,3 +121,15 @@ export default class SurveyCoffee extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  // console.log(state);
+  return {
+    hotCold: state.survey.hotCold
+  }; //global state diubah menjadi props supaya bisa dipake di component
+};
+
+export default connect(
+  mapStateToProps,
+  { handleHotColdSurvey }
+)(withRouter(HotColdSurvey)); //state, action, classname

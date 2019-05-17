@@ -21,7 +21,7 @@ export default class ResultNav extends React.Component {
   render() {
     return (
       <Navbar style={style.navBg} expand="lg">
-        <Navbar.Brand href="#home">
+        <Navbar.Brand>
           <Link to="/dashboard">
             <Image width="250" src={Coffee} alt="" />
           </Link>
