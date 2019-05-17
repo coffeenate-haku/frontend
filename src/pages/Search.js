@@ -2,9 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import ResultNav from "../components/ResultNav";
-import DefaultImg from "../assets/images/default-image.jpeg";
-import Rating from "../assets/thumbnail/five-star.png";
+// import DefaultImg from "../assets/images/default-image.jpeg";
+// import Rating from "../assets/thumbnail/five-star.png";
 import styled from "@emotion/styled";
+import { getRecommendedRestaurants } from "../utils/api";
 import { getBestRestaurants } from "../utils/api";
 import { getRestaurantbyDistance } from "../utils/api";
 import { connect } from "react-redux";
@@ -52,34 +53,34 @@ const H5 = styled.h5`
   color: #4c3a32;
 `;
 
-const best = [
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  },
-  {
-    image: DefaultImg,
-    title: "Default Title",
-    rating: Rating
-  }
-];
+// const best = [
+//   {
+//     image: DefaultImg,
+//     title: "Default Title",
+//     rating: Rating
+//   },
+//   {
+//     image: DefaultImg,
+//     title: "Default Title",
+//     rating: Rating
+//   },
+//   {
+//     image: DefaultImg,
+//     title: "Default Title",
+//     rating: Rating
+//   },
+//   {
+//     image: DefaultImg,
+//     title: "Default Title",
+//     rating: Rating
+//   }
+// ];
 
 class Search extends React.Component {
   state = {
     restaurants: [],
     nearestRestaurants: [],
-    searchRestaurants: []
+    bestRestaurants: []
   };
 
   componentDidMount() {
@@ -87,16 +88,23 @@ class Search extends React.Component {
 
     const joinQuery = query.join(" ");
 
-    getBestRestaurants(joinQuery)
+    getRecommendedRestaurants(joinQuery)
       .then(response => {
-        console.log(response);
+        // console.log(response);
         this.setState({
           restaurants: response
-        })
+        });
       })
       .catch(error => {
         console.log(error);
       });
+
+    getBestRestaurants().then(response => {
+      console.log(response);
+      this.setState({
+        bestRestaurants: response
+      });
+    });
 
     getRestaurantbyDistance().then(response => {
       this.setState({
@@ -121,7 +129,9 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{data.restaurant.name}</H5>
-                  <p>Rating : {data.restaurant.user_rating.aggregate_rating}</p>
+                  <p>
+                    Rating : {data.restaurant.user_rating.aggregate_rating}/5
+                  </p>
                 </Card>
               );
             })}
@@ -131,7 +141,7 @@ class Search extends React.Component {
         <Container>
           <H4>Best Seller</H4>
           <Div>
-            {this.state.restaurants.map((item, index) => {
+            {this.state.bestRestaurants.map((item, index) => {
               return (
                 <Card key={index}>
                   <Link to="/details" onClick={item.restaurant}>
