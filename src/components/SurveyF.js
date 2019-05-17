@@ -69,6 +69,7 @@ class FlavorsSurvey extends React.Component {
     await Object.keys(this.state.flavors).forEach((key, index) => {
       if (this.state.flavors[key]) {
         flavorsResult.push(key);
+        console.log(flavorsResult);
       }
     });
 
@@ -85,9 +86,8 @@ class FlavorsSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.flavors).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.flavors[key]}
@@ -125,6 +125,8 @@ class FlavorsSurvey extends React.Component {
 }
 
 const mapStateToProps = state => {
+  console.log(state);
+
   return {
     flavors: state.survey.flavors
   };

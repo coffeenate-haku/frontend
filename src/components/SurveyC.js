@@ -69,6 +69,7 @@ class BodyLevelSurvey extends React.Component {
     await Object.keys(this.state.bodyLevel).forEach((key, index) => {
       if (this.state.bodyLevel[key]) {
         bodyLevelResult.push(key);
+        console.log(bodyLevelResult);
       }
     });
 
@@ -85,9 +86,8 @@ class BodyLevelSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.bodyLevel).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.bodyLevel[key]}

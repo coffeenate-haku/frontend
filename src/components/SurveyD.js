@@ -67,6 +67,7 @@ class FoamLevelSurvey extends React.Component {
     await Object.keys(this.state.foamLevel).forEach((key, index) => {
       if (this.state.foamLevel[key]) {
         foamLevelResult.push(key);
+        console.log(foamLevelResult);
       }
     });
 
@@ -83,9 +84,8 @@ class FoamLevelSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.foamLevel).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.foamLevel[key]}

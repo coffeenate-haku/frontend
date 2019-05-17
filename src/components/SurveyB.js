@@ -67,6 +67,7 @@ class SugarLevelSurvey extends React.Component {
     await Object.keys(this.state.sugarLevel).forEach((key, index) => {
       if (this.state.sugarLevel[key]) {
         sugarLevelResult.push(key);
+        console.log(sugarLevelResult);
       }
     });
 
@@ -83,9 +84,8 @@ class SugarLevelSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.sugarLevel).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.sugarLevel[key]}

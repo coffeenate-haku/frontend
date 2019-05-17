@@ -4,7 +4,7 @@ const initialState = {
   bodyLevel: [],
   foamLevel: [],
   milkLevel: [],
-  flavors: []
+  flavorsLevel: []
 };
 
 const surveyReducer = (state = initialState, action) => {

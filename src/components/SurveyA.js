@@ -67,6 +67,7 @@ class HotColdSurvey extends React.Component {
     await Object.keys(this.state.hotCold).forEach((key, index) => {
       if (this.state.hotCold[key]) {
         hotColdResult.push(key);
+        console.log(hotColdResult);
       }
     });
 
@@ -83,9 +84,8 @@ class HotColdSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.hotCold).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.hotCold[key]}

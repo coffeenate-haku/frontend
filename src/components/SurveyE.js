@@ -69,6 +69,7 @@ class MilkLevelSurvey extends React.Component {
     await Object.keys(this.state.milkLevel).forEach((key, index) => {
       if (this.state.milkLevel[key]) {
         milkLevelResult.push(key);
+        console.log(milkLevelResult);
       }
     });
 
@@ -85,9 +86,8 @@ class MilkLevelSurvey extends React.Component {
   renderCoffeeTypes() {
     return Object.keys(this.state.milkLevel).map((key, index) => {
       return (
-        <div>
+        <div key={index}>
           <input
-            key={index}
             onChange={this.handleCheckChieldElement}
             type="checkbox"
             checked={this.state.milkLevel[key]}
