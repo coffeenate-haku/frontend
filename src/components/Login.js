@@ -40,13 +40,15 @@ const Login = props => {
       <Formik
         initialValues={{ email: "", password: "" }}
         validate={validateEmail}
-        onSubmit={(values, { setSubmitting }) => {
+        onSubmit={async (values, { setSubmitting }) => {
           const userLogin = {
             email: values.email,
             password: values.password
           };
 
-          props.login(userLogin);
+          await props.login(userLogin);
+
+          await props.handleClose()
         }}
       >
         {({ isSubmitting }) => (
@@ -63,6 +65,7 @@ const Login = props => {
             <div>
               <Field
                 style={style.field}
+                autocomplete="current-password"
                 placeholder="Password"
                 type="password"
                 name="password"
