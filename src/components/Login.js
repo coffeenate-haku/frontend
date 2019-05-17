@@ -70,7 +70,7 @@ const Login = props => {
               <ErrorMessage name="password" component="div" />
             </div>
             <Button type="submit" disabled={isSubmitting}>
-              Login
+              Log in
             </Button>
           </Form>
         )}

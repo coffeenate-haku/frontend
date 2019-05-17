@@ -130,11 +130,10 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
-                  <div>
-                    <p>
-                      Rating: {item.restaurant.user_rating.aggregate_rating}/5
-                    </p>
-                  </div>
+
+                  <p>
+                    Rating: {item.restaurant.user_rating.aggregate_rating}/5
+                  </p>
                 </Card>
               );
             })}
@@ -153,6 +152,7 @@ class Search extends React.Component {
                     </Images>
                   </Link>
                   <H5>{item.restaurant.name}</H5>
+
                   <p>
                     Rating: {item.restaurant.user_rating.aggregate_rating}/5
                   </p>

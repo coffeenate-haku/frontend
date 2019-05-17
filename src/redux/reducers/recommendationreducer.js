@@ -1,13 +1,12 @@
 const initialState = {
-  keyword: ""
+  name: []
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case "search":
+    case "recommendation":
       return {
-        ...state,
-        search: action.payload
+        ...action.payload
       };
     default:
       return state;

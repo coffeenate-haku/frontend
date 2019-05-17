@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
-import profilereducer from "./profilereducer";
+import profileReducer from "./profilereducer";
 import surveyReducer from "./surveyreducer";
+import recommendationReducer from "./recommendationreducer";
 
 const rootReducers = combineReducers({
-  profile: profilereducer,
-  survey: surveyReducer
+  profile: profileReducer,
+  survey: surveyReducer,
+  recommendation: recommendationReducer
 });
 
 export default rootReducers;
