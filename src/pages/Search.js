@@ -100,7 +100,7 @@ class Search extends React.Component {
                 <Card key={index}>
                   <Link to="/details">
                     <Images>
-                      <Img src={data.restaurant.thumb} alt="" />
+                      <Img src={data.restaurant.thumb} alt="restaurant" />
                     </Images>
                   </Link>
                   <H5>{data.restaurant.name}</H5>
