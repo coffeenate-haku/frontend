@@ -170,7 +170,6 @@ class Navigation extends React.Component {
 }
 
 const mapStateToProps = store => {
-  console.log(store);
   return {
     isAuthenticated: store.profile.isAuthenticated,
     lgshow: store.profile.modal

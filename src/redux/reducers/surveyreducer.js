@@ -4,7 +4,7 @@ const initialState = {
   bodyLevel: [],
   foamLevel: [],
   milkLevel: [],
-  flavorsLevel: []
+  flavors: []
 };
 
 const surveyReducer = (state = initialState, action) => {
@@ -37,7 +37,7 @@ const surveyReducer = (state = initialState, action) => {
     case "HANDLE_FLAVORS_LEVEL_SURVEY":
       return {
         ...state,
-        flavorsLevel: action.payload
+        flavors: action.payload
       };
     default:
       return state;

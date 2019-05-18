@@ -98,34 +98,34 @@ class FlavorsSurvey extends React.Component {
     Object.keys(coffees).forEach(coffee => {
       if (coffee === event.target.value) coffees[coffee] = event.target.checked;
     });
-    this.setState({ coffees }, console.log(this.state));
+    this.setState({ coffees });
   };
 
   onSubmit = async e => {
     e.preventDefault();
-
+    console.log(this.props.surveyResults)
     axios
       .put(
         `${process.env.REACT_APP_API_COFFEE_RECOMMENDATION}/${
           this.props.userId
         }`,
-        `${this.props.surveyResults}`,
         {
           headers: {
-            Authorization: `Bearer ${this.props.userToken}`
+            Authorization: `Bearer ${this.props.userToken}`,
           }
-        }
+        },
+        `${this.props.surveyResults}`,
       )
       .then(response => {
         console.log(response);
-      });
+      })
+      .catch(err => console.log(err));
 
     const flavorsResult = [];
 
     await Object.keys(this.state.flavors).forEach((key, index) => {
       if (this.state.flavors[key]) {
         flavorsResult.push(key);
-        console.log(flavorsResult);
       }
     });
 
