@@ -1,15 +1,18 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import { getRecommendation } from "../redux/actions/getRecommendation";
 
 const style = {
+  main: {
+    padding: "50px"
+  },
+
   container: {
-    textAlign: "center",
-    topMargin: "20px",
+    textAlign: "right",
     display: "flex",
-    flexDirection: "row",
+    flexWrap: "wrap",
     justifyContent: "center",
     paddingTop: "50px"
   },
@@ -17,15 +20,25 @@ const style = {
   card: {
     textAlign: "center",
     justifyContent: "center",
-    width: "300px"
+    display: "flex",
+    flexDirection: "row",
+    width: "700px"
+  },
+
+  p: {
+    textAlign: "justify"
   },
 
   button: {
     paddingTop: "50px",
     textAlign: "center",
     justifyContent: "center"
+  },
+  bgColor: {
+    backgroundColor: "#4C3A32",
+    padding: "10px 20px"
   }
-}
+};
 
 class ResultComponent extends React.Component {
   // state = {
@@ -33,35 +46,39 @@ class ResultComponent extends React.Component {
   // };
 
   componentDidMount() {
-   this.props.getRecommendation(this.props.id)
+    this.props.getRecommendation(this.props.id);
   }
 
   render() {
-    const recommendations = this.props.recommendation.map(
-      (item, index) => {
-        return (
-          <div style={style.container} key={index}>
-            <Card style={style.card}>
-              <Card.Img variant="top" src={item.image} alt="" />
+    const recommendations = this.props.recommendation.map((item, index) => {
+      return (
+        <div style={style.container} key={index}>
+          <Card style={style.card}>
+            <div>
+              <Card.Img variant="top" width="300" src={item.image} alt="" />
+            </div>
+            <div>
               <Card.Body>
-                <h5>You got {item.name}</h5>
-                <p>{item.descriptions}</p>
+                <h4>You got {item.name}</h4>
+                <p style={style.p}>{item.descriptions}</p>
               </Card.Body>
-            </Card>
-          </div>
-        );
-      }
-    );
+            </div>
+          </Card>
+        </div>
+      );
+    });
     return (
-      <div>
+      <div style={style.main}>
         {recommendations}
         <div style={style.button}>
           <NavLink to="/search">
-            <Button variant="primary">See restaurants that matches you</Button>
+            <Button style={style.bgColor}>
+              See restaurants that matches you
+            </Button>
           </NavLink>
         </div>
       </div>
-    )
+    );
   }
 }
 
