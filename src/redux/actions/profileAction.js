@@ -1,5 +1,17 @@
 import axios from "axios";
 
+export const closeModal = () => dispatch => {
+  dispatch({
+    type: "CLOSE_MODAL"
+  })
+}
+
+export const openModal = () => dispatch => {
+  dispatch({
+    type: "OPEN_MODAL"
+  })
+}
+
 export const login = data => dispatch => {
   axios
     .post(`${process.env.REACT_APP_API_URL}/users/login`, data, {

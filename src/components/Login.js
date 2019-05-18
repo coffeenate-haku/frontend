@@ -47,8 +47,6 @@ const Login = props => {
           };
 
           await props.login(userLogin);
-
-          await props.handleClose()
         }}
       >
         {({ isSubmitting }) => (

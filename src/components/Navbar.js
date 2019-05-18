@@ -4,6 +4,8 @@ import styled from "@emotion/styled";
 import "../index.css";
 import { connect } from "react-redux";
 
+import { closeModal, openModal } from "../redux/actions/profileAction";
+
 import Coffee from "../assets/logos/logo-main.svg";
 import {
   Modal,
@@ -70,22 +72,6 @@ const LinkNav = styled.div`
 `;
 
 class Navigation extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      key: "Sign",
-      lgshow: false
-    };
-  }
-
-  handleClose = () => {
-    this.setState({ lgshow: false });
-  };
-
-  handleShow = () => {
-    this.setState({ lgshow: true });
-  };
   render() {
     return (
       <Navbar style={style.navStyle} collapseOnSelect sty="true">
@@ -114,7 +100,7 @@ class Navigation extends React.Component {
               ) : (
                 <NavLink
                   to="/"
-                  onClick={this.handleShow}
+                  onClick={this.props.openModal}
                   style={style.specialLink}
                 >
                   Sign in
@@ -123,7 +109,11 @@ class Navigation extends React.Component {
             </LinkNav>
           </Div>
         </Navbar.Collapse>
-        <Modal size="lg" show={this.state.lgshow} onHide={this.handleClose}>
+        <Modal
+          size="lg"
+          show={this.props.lgshow}
+          onHide={this.props.closeModal}
+        >
           <Modal.Header closeButton>
             <Modal.Title />
           </Modal.Header>
@@ -142,7 +132,7 @@ class Navigation extends React.Component {
                       <Image src={modal} alt="modal" style={style.img} />
                     </Col>
                     <Col xs={12} md={4} style={style.col}>
-                      <Login handleClose={this.handleClose}/>
+                      <Login />
                     </Col>
                   </Row>
                 </Container>
@@ -169,11 +159,15 @@ class Navigation extends React.Component {
   }
 }
 
-const mapStateToProps = store => ({
-  isAuthenticated: store.profile.isAuthenticated
-});
+const mapStateToProps = store => {
+  console.log(store);
+  return {
+    isAuthenticated: store.profile.isAuthenticated,
+    lgshow: store.profile.modal
+  };
+};
 
 export default connect(
   mapStateToProps,
-  null
+  { closeModal, openModal }
 )(Navigation);

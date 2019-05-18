@@ -4,7 +4,8 @@ const initialState = {
   name: null,
   email: null,
   isAuthenticated: false,
-  isAdmin: null
+  isAdmin: null,
+  modal: false
 };
 
 export default (state = initialState, action) => {
@@ -13,7 +14,18 @@ export default (state = initialState, action) => {
       return {
         ...state, //state dari initialState
         ...action.payload, //state dalam action
-        isAuthenticated: true
+        isAuthenticated: true,
+        modal: false
+      };
+    case "OPEN_MODAL":
+      return {
+        ...state,
+        modal: true
+      };
+    case "CLOSE_MODAL":
+      return {
+        ...state,
+        modal: false
       };
     default:
       return state;
