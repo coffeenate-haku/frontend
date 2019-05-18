@@ -72,6 +72,16 @@ const LinkNav = styled.div`
 `;
 
 class Navigation extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      key: "Sign",
+      
+    };
+  }
+
+ 
   render() {
     return (
       <Navbar style={style.navStyle} collapseOnSelect sty="true">
