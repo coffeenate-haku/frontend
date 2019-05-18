@@ -103,7 +103,16 @@ class FlavorsSurvey extends React.Component {
 
   onSubmit = async e => {
     e.preventDefault();
-    console.log(this.props.surveyResults)
+    const flavorsResult = [];
+
+    await Object.keys(this.state.flavors).forEach((key, index) => {
+      if (this.state.flavors[key]) {
+        flavorsResult.push(key);
+      }
+    });
+
+    await this.props.handleFlavorsLevelSurvey(flavorsResult);
+
     axios
       .put(
         `${process.env.REACT_APP_API_COFFEE_RECOMMENDATION}/${
@@ -121,15 +130,9 @@ class FlavorsSurvey extends React.Component {
       })
       .catch(err => console.log(err));
 
-    const flavorsResult = [];
+    
 
-    await Object.keys(this.state.flavors).forEach((key, index) => {
-      if (this.state.flavors[key]) {
-        flavorsResult.push(key);
-      }
-    });
 
-    this.props.handleFlavorsLevelSurvey(flavorsResult);
     this.props.history.push("/result");
   };
 
