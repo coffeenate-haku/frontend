@@ -1,12 +1,12 @@
-import React from "react";
-import { connect } from "react-redux";
-import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey";
-import { withRouter } from "react-router-dom";
-import styled from "@emotion/styled";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
+import React from "react"
+import { connect } from "react-redux"
+import { handleFlavorsLevelSurvey } from "../redux/actions/handleSurvey"
+import { withRouter } from "react-router-dom"
+import styled from "@emotion/styled"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons"
 
-const axios = require("axios");
+const axios = require("axios")
 
 const style = {
   main: {
@@ -62,7 +62,7 @@ const style = {
     width: "200px",
     margin: "10px"
   }
-};
+}
 
 const StyledOption = styled.div`
   padding: 10px 20px;
@@ -80,7 +80,7 @@ const StyledOption = styled.div`
     cursor: pointer;
     color: #f4f0e5;
   }
-`;
+`
 
 class FlavorsSurvey extends React.Component {
   state = {
@@ -91,56 +91,50 @@ class FlavorsSurvey extends React.Component {
       toastedNut: false,
       vanilla: false
     }
-  };
+  }
 
   handleCheckChieldElement = event => {
-    let coffees = this.state.flavors;
+    let coffees = this.state.flavors
     Object.keys(coffees).forEach(coffee => {
-      if (coffee === event.target.value) coffees[coffee] = event.target.checked;
-    });
-    this.setState({ coffees });
-  };
+      if (coffee === event.target.value) coffees[coffee] = event.target.checked
+    })
+    this.setState({ coffees })
+  }
 
   onSubmit = async e => {
-    e.preventDefault();
-    const flavorsResult = [];
+    e.preventDefault()
+    const flavorsResult = []
 
     await Object.keys(this.state.flavors).forEach((key, index) => {
       if (this.state.flavors[key]) {
-        flavorsResult.push(key);
+        flavorsResult.push(key)
       }
-    });
+    })
 
-    await this.props.handleFlavorsLevelSurvey(flavorsResult);
+    await this.props.handleFlavorsLevelSurvey(flavorsResult)
 
     axios
       .put(
-        `${process.env.REACT_APP_API_COFFEE_RECOMMENDATION}/${
-          this.props.userId
-        }`,
+        `${process.env.REACT_APP_API_URL}/users/${this.props.userId}`,
+        this.props.surveyResults,
         {
           headers: {
-            Authorization: `Bearer ${this.props.userToken}`,
+            Authorization: `Bearer ${this.props.userToken}`
           }
-        },
-        `${this.props.surveyResults}`,
+        }
       )
       .then(response => {
-        console.log(response);
+        console.log(response)
+        this.props.history.push("/result")
       })
-      .catch(err => console.log(err));
-
-    
-
-
-    this.props.history.push("/result");
-  };
+      .catch(err => console.log(err))
+  }
 
   setRedirect = () => {
     this.setState({
       redirect: true
-    });
-  };
+    })
+  }
 
   handleOptionPressed = key => {
     this.setState({
@@ -148,8 +142,8 @@ class FlavorsSurvey extends React.Component {
         ...this.state.flavors,
         [key]: !this.state.flavors[key]
       }
-    });
-  };
+    })
+  }
 
   renderCoffeeTypes() {
     return Object.keys(this.state.flavors).map((key, index) => {
@@ -158,8 +152,8 @@ class FlavorsSurvey extends React.Component {
           <span>{key}</span>
           {this.state.flavors[key] && <FontAwesomeIcon icon={faCheckCircle} />}
         </StyledOption>
-      );
-    });
+      )
+    })
   }
 
   render() {
@@ -185,22 +179,22 @@ class FlavorsSurvey extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
 const mapStateToProps = state => {
-  console.log(state);
+  console.log(state)
 
   return {
     flavors: state.survey.flavors,
     surveyResults: state.survey,
     userId: state.profile.id,
     userToken: state.profile.token
-  };
-};
+  }
+}
 
 export default connect(
   mapStateToProps,
   { handleFlavorsLevelSurvey }
-)(withRouter(FlavorsSurvey));
+)(withRouter(FlavorsSurvey))
